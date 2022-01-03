@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:background="@drawable/background_border_black"
+    android:elevation="3dp"
+    android:padding="15dp"
+    android:id="@+id/note_item"
+    >
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/TitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"/>
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/BodyText"
+        android:maxLines="9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        />
+    <LinearLayout
+        android:id="@+id/ListSpace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        />
+</LinearLayout>

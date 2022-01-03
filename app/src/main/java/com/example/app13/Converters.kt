@@ -1,0 +1,43 @@
+package com.example.app13
+
+import androidx.room.TypeConverter
+import org.json.JSONArray
+import org.json.JSONObject
+
+object Converters {
+    @TypeConverter
+    fun spansToJSON(spans: List<SpanRepresentation>): String {
+        val objects = spans.map { spanRepresentation -> spanRepresentation.toJSONObject() }
+        return JSONArray(objects).toString()
+    }
+    @TypeConverter
+    fun jsonToSpans(json: String): List<SpanRepresentation> {
+        val iterable = JSONArray(json).iterable<JSONObject>()
+        return iterable.map { jsonObject -> SpanRepresentation.fromJSONObject(jsonObject) }
+    }
+    @TypeConverter
+    fun itemsToJson(items: List<ListItem>): String {
+        val objects = items.map { listItem -> listItem.toJSONObject() }
+        return JSONArray(objects).toString()
+    }
+    @TypeConverter
+    fun jsonToItems(json: String): List<ListItem> {
+        val iterable = JSONArray(json).iterable<JSONObject>()
+        return iterable.map { jsonObject -> ListItem.fromJSONObject(jsonObject) }
+    }
+    private fun <T> JSONArray.iterable(): Iterable<T> {
+        return Iterable {
+            object : Iterator<T> {
+                var nextIndex = 0
+                override fun next(): T {
+                    val element = get(nextIndex)
+                    nextIndex++
+                    return element as T
+                }
+                override fun hasNext(): Boolean {
+                    return nextIndex < length()
+                }
+            }
+        }
+    }
+}
