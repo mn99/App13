@@ -26,7 +26,7 @@ class TakeNoteModel(app: Application) : AndroidViewModel(app) {
     var title = String()
     var timestamp = Date().time
     var body = Editable.Factory.getInstance().newEditable(String())
-    fun getBaseNote(): BaseNote {
+    private fun getBaseNote(): BaseNote {
         return BaseNote.createNote(id, folder, title, timestamp, body.toString().trimEnd(), body.getFilteredSpans())
     }
     fun setStateFromBaseNote(baseNote: BaseNote) {
@@ -93,5 +93,11 @@ class TakeNoteModel(app: Application) : AndroidViewModel(app) {
             id = withContext(Dispatchers.IO) { baseNoteDao.insertBaseNote(getBaseNote()) }
             onComplete?.invoke()
         }
+    }
+    fun moveBaseNoteToArchive() {
+        folder = Folder.ARCHIVED
+    }
+    fun moveBaseNoteToDeleted() {
+        folder = Folder.DELETED
     }
 }

@@ -76,7 +76,8 @@ fun Context.getLocale(): Locale {
         resources.configuration.locales[0]
     } else resources.configuration.locale
 }
-class Operation(val textId: Int, val drawableId: Int, val operation: () -> Unit)fun Fragment.showMenu(vararg operations: Operation) {
+class Operation(val textId: Int, val drawableId: Int, val operation: () -> Unit)
+fun Fragment.showMenu(vararg operations: Operation) {
     val context = requireContext()
     val linearLayout = LinearLayout(context)
     linearLayout.orientation = LinearLayout.VERTICAL

@@ -1,5 +1,6 @@
 package com.example.app13
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
@@ -30,8 +31,6 @@ class TakeNote : AppCompatActivity() {
                 model.setStateFromBaseNote(selectedBaseNote)
             } else model.isNewNote = true
             model.isFirstInstance = false
-            setupEditor()
-            setupListeners()
         }
         binding = ActivityAddNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -156,7 +155,6 @@ class TakeNote : AppCompatActivity() {
         }
     }
     companion object {
-        const val EXTRA_SPANNABLE = "com.example.app12.EXTRA_SPANNABLE"
         fun getURLFrom(text: String): String {
             return when {
                 text.matches(Patterns.PHONE.toRegex()) -> "tel:$text"
@@ -175,5 +173,34 @@ class TakeNote : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.title = null
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        model.saveNote()
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val menuId = when (model.folder) {
+            Folder.NOTES -> R.menu.notes
+            Folder.DELETED -> R.menu.deleted
+            Folder.ARCHIVED -> R.menu.archived
+        }
+        menuInflater.inflate(menuId, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> onBackPressed()
+            R.id.Delete -> deleteNote()
+            R.id.Archive -> archiveNote()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    private fun deleteNote() {
+        model.moveBaseNoteToDeleted()
+        onBackPressed()
+    }
+    private fun archiveNote() {
+        model.moveBaseNoteToArchive()
+        onBackPressed()
     }
 }

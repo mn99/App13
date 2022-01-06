@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/drawable/add.xml" value="0.2777777777777778" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/drawable/background_border.xml" value="0.34427083333333336" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/drawable/background_border_black.xml" value="0.34427083333333336" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/drawable/background_border_pressed.xml" value="0.5661458333333333" />
@@ -16,8 +17,10 @@
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/drawable/light_grey_color.xml" value="0.34427083333333336" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/drawable/nav_view_background.xml" value="0.34427083333333336" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/drawable/red_color.xml" value="0.34427083333333336" />
+        <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/drawable/restore.xml" value="0.34427083333333336" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/drawable/side_nav_bar.xml" value="0.5661458333333333" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/drawable/toolbar_ripple.xml" value="0.5661458333333333" />
+        <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/drawable/unarchive.xml" value="0.5661458333333333" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/drawable/vertical_dots.xml" value="0.34427083333333336" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/layout/activity_add_note.xml" value="0.2971014492753623" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/layout/activity_main.xml" value="0.3079710144927536" />
@@ -29,8 +32,11 @@
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/layout/nav_header_main.xml" value="0.3079710144927536" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/layout/note_row_item.xml" value="0.2674772036474164" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/menu/activity_main_drawer.xml" value="0.328125" />
+        <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/menu/archived.xml" value="0.55" />
+        <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/menu/deleted.xml" value="0.55" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/menu/formatting.xml" value="0.328125" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/menu/main.xml" value="0.55" />
+        <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/menu/notes.xml" value="0.5415384615384615" />
       </map>
     </option>
   </component>

@@ -2,18 +2,14 @@ package com.example.app13
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.app13.databinding.FragmentNotesBinding
+import com.google.android.material.snackbar.Snackbar
 
 class FragmentNotes : Fragment(), ItemListener {
     private var binding: FragmentNotesBinding? = null
@@ -25,8 +21,7 @@ class FragmentNotes : Fragment(), ItemListener {
         adapter = null
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
+//        super.onViewCreated(view, savedInstanceState)
         adapter = BaseNoteAdapter(this)
         adapter?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
@@ -39,9 +34,7 @@ class FragmentNotes : Fragment(), ItemListener {
         binding?.RecyclerView?.setHasFixedSize(true)
         setupRecyclerView()
         setupObserver()
-        (requireContext() as MainActivity).binding.appBarMain.fab.setOnClickListener {
-            displayNoteTypes()
-        }
+        setHasOptionsMenu(true)
     }
     override fun onClick(position: Int) {
         adapter?.currentList?.get(position)?.let { baseNote ->

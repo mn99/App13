@@ -27,4 +27,7 @@
     <string name="delete">Delete</string>
     <string name="archive">Archive</string>
     <string name="take_note">Take note</string>
+    <string name="unarchive">Unarchive</string>
+    <string name="restore">Restore</string>
+    <string name="delete_forever">Delete forever</string>
 </resources>
