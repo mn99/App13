@@ -21,7 +21,7 @@ import com.example.app13.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
-    internal lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         } else binding.appBarMain.fab.hide()
 //        binding.EnterSearchKeyword.isVisible = (destination.id == androidx.navigation.R.id.Search)
     }
-    internal fun goToActivity(activity: Class<*>, baseNote: BaseNote? = null) {
+    private fun goToActivity(activity: Class<*>, baseNote: BaseNote? = null) {
         val intent = Intent(this, activity)
         intent.putExtra(Constants.SelectedBaseNote, baseNote)
         startActivity(intent)

@@ -1,8 +1,11 @@
 package com.example.app13
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -21,7 +24,6 @@ class FragmentNotes : Fragment(), ItemListener {
         adapter = null
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
         adapter = BaseNoteAdapter(this)
         adapter?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
@@ -41,6 +43,22 @@ class FragmentNotes : Fragment(), ItemListener {
             when (baseNote.type) {
                 Type.NOTE -> goToActivity(TakeNote::class.java, baseNote)
 //                Type.LIST -> goToActivity(MakeList::class.java, baseNote)
+            }
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentNotesBinding.inflate(inflater)
+        return binding?.root
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == Constants.RequestCodeExportFile && resultCode == Activity.RESULT_OK) {
+            data?.data?.let { uri ->
+                model.writeCurrentFileToUri(uri)
             }
         }
     }

@@ -7,7 +7,7 @@
     android:layout_marginRight="5dp"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:background="@drawable/background_border_black"
+    android:background="@drawable/background_border_colored"
     android:elevation="3dp"
     android:padding="15dp"
     android:id="@+id/note_item"

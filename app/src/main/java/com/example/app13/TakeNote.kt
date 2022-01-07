@@ -99,7 +99,6 @@ class TakeNote : AppCompatActivity() {
     }
     private fun setStateFromModel() {
         val formatter = BaseNoteModel.getDateFormatter(getLocale())
-
         binding.EditTitle.setText(model.title)
         binding.EditBody.text = model.body
         binding.TimeCreated.text = formatter.format(model.timestamp)
