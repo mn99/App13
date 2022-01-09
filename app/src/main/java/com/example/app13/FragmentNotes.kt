@@ -12,7 +12,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.app13.databinding.FragmentNotesBinding
-import com.google.android.material.snackbar.Snackbar
 
 class FragmentNotes : Fragment(), ItemListener {
     private var binding: FragmentNotesBinding? = null
@@ -53,6 +52,7 @@ class FragmentNotes : Fragment(), ItemListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNotesBinding.inflate(inflater)
+//        (requireActivity() as MainActivity).supportActionBar!!.show()
         return binding?.root
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

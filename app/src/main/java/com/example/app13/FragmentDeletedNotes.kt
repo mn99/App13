@@ -1,44 +1,115 @@
 package com.example.app13
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
+import android.view.*
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.app13.databinding.FragmentDeletedNotesBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class FragmentDeletedNotes : Fragment() {
-
-    private lateinit var galleryViewModel: FragmentDeletedNotesViewModel
-    private var _binding: FragmentDeletedNotesBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        galleryViewModel =
-            ViewModelProvider(this).get(FragmentDeletedNotesViewModel::class.java)
-
-        _binding = FragmentDeletedNotesBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textGallery
-        galleryViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
-    }
-
+class FragmentDeletedNotes : Fragment(), ItemListener {
+    private var binding: FragmentDeletedNotesBinding? = null
+    private var adapter: BaseNoteAdapter? = null
+    private val model: BaseNoteModel by activityViewModels()
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        binding = null
+        adapter = null
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        adapter = BaseNoteAdapter(this)
+        adapter?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                if (itemCount > 0) {
+                    binding?.RecyclerViewDeleted?.scrollToPosition(positionStart)
+                }
+            }
+        })
+        binding?.RecyclerViewDeleted?.adapter = adapter
+        binding?.RecyclerViewDeleted?.setHasFixedSize(true)
+        setupRecyclerView()
+        setupObserver()
+        setHasOptionsMenu(true)
+    }
+    private fun setupRecyclerView() {
+        binding?.RecyclerViewDeleted?.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
+    }
+    private fun getObservable() = model.deletedNotes
+    private fun setupObserver() {
+        getObservable().observe(viewLifecycleOwner, { list ->
+            adapter?.submitList(list)
+            binding?.RecyclerViewDeleted?.isVisible = list.isNotEmpty()
+        })
+    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentDeletedNotesBinding.inflate(inflater)
+//        (requireActivity() as MainActivity).binding.appBarMain.toolbar
+//        (requireActivity() as MainActivity).supportActionBar!!.
+//        val defaultToolbar = (requireContext() as MainActivity).binding.appBarMain.toolbar
+//        val currentToolbar = (requireContext() as MainActivity).binding.appBarMain.toolbarDeletedFragment
+        return binding?.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.delete_all, menu)
+//        val currentToolbar = ((context as MainActivity).binding.appBarMain.toolbar)
+//        currentToolbar.title = "Deleted"
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == Constants.RequestCodeExportFile && resultCode == Activity.RESULT_OK) {
+            data?.data?.let { uri ->
+                model.writeCurrentFileToUri(uri)
+            }
+        }
+    }
+    override fun onClick(position: Int) {
+        adapter?.currentList?.get(position)?.let { baseNote ->
+            when (baseNote.type) {
+                Type.NOTE -> goToActivity(TakeNote::class.java, baseNote)
+//                Type.LIST -> goToActivity(MakeList::class.java, baseNote)
+            }
+        }
+    }
+    override fun onLongClick(position: Int) {
+        adapter?.currentList?.get(position)?.let { baseNote -> showOperations(baseNote) }
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.DeleteAll) {
+            confirmDeletionOfAllNotes()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    private fun confirmDeletionOfAllNotes() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage(R.string.delete_all_notes)
+            .setPositiveButton(R.string.delete) { dialog, which ->
+                model.deleteAllBaseNotes()
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
+    }
+    private fun confirmDeletionOfSingleNote(baseNote: BaseNote) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage(R.string.delete_note_forever)
+            .setPositiveButton(R.string.delete) { dialog, which ->
+                model.deleteBaseNoteForever(baseNote)
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
+    }
+    private fun showOperations(baseNote: BaseNote) {
+        val restore = Operation(R.string.restore, R.drawable.restore) { model.restoreBaseNote(baseNote.id) }
+        val deleteForever = Operation(R.string.delete_forever, R.drawable.delete) { confirmDeletionOfSingleNote(baseNote) }
+        showMenu(restore, deleteForever)
+    }
+    private fun goToActivity(activity: Class<*>, baseNote: BaseNote? = null) {
+        val intent = Intent(requireContext(), activity)
+        intent.putExtra(Constants.SelectedBaseNote, baseNote)
+        startActivity(intent)
     }
 }

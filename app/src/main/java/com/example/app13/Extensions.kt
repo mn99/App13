@@ -1,6 +1,7 @@
 package com.example.app13
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Build
 import android.text.Editable
@@ -80,6 +81,7 @@ class Operation(val textId: Int, val drawableId: Int, val operation: () -> Unit)
 fun Fragment.showMenu(vararg operations: Operation) {
     val context = requireContext()
     val linearLayout = LinearLayout(context)
+//    linearLayout.setBackgroundColor(Color.parseColor("#2121FF"))
     linearLayout.orientation = LinearLayout.VERTICAL
     linearLayout.layoutParams = LinearLayout.LayoutParams(
         LinearLayout.LayoutParams.MATCH_PARENT,

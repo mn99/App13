@@ -12,12 +12,6 @@
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-<!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
-<!--        -->
-<!--        -->
-<!--    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -31,5 +25,4 @@
         app:itemBackground="@drawable/nav_view_background"
         android:paddingEnd="10dp"
         android:theme="@style/theme_nav_items"/>
-
 </androidx.drawerlayout.widget.DrawerLayout>

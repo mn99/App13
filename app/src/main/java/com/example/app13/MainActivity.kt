@@ -21,7 +21,7 @@ import com.example.app13.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
+    internal lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -47,6 +47,11 @@ class MainActivity : AppCompatActivity() {
             binding.navView.setCheckedItem(destination.id)
             handleDestinationChange(destination)
         }
+//        binding.navView.setNavigationItemSelectedListener { item ->
+//            fragmentIdToLoad = item.itemId
+//            binding.drawerLayout.closeDrawer(GravityCompat.START, true)
+//            return@setNavigationItemSelectedListener true
+//        }
     }
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -62,7 +67,13 @@ class MainActivity : AppCompatActivity() {
     private fun handleDestinationChange(destination: NavDestination) {
         if (destination.id == R.id.nav_notes) {
             binding.appBarMain.fab.show()
-        } else binding.appBarMain.fab.hide()
+//            supportActionBar?.show()
+//            binding.appBarMain.bottomAppBar.visibility()
+        } else {
+//            supportActionBar?.hide()
+//            setSupportActionBar(binding.appBarMain.toolbarDeletedFragment)
+            binding.appBarMain.fab.hide()
+        }
 //        binding.EnterSearchKeyword.isVisible = (destination.id == androidx.navigation.R.id.Search)
     }
     private fun goToActivity(activity: Class<*>, baseNote: BaseNote? = null) {

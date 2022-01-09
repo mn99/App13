@@ -30,4 +30,8 @@
     <string name="unarchive">Unarchive</string>
     <string name="restore">Restore</string>
     <string name="delete_forever">Delete forever</string>
+    <string name="delete_all">Delete all</string>
+    <string name="delete_all_notes">Delete all notes?</string>
+    <string name="delete_note_forever">Delete note forever?</string>
+    <string name="cancel">Cancel</string>
 </resources>
