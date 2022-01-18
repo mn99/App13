@@ -76,7 +76,7 @@ class FragmentNotes : Fragment(), ItemListener {
         showMenu(delete, archive)
     }
     private fun setupRecyclerView() {
-        binding?.RecyclerView?.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
+        binding?.RecyclerView?.layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
     }
     private fun getObservable() = model.baseNotes
     private fun setupObserver() {
