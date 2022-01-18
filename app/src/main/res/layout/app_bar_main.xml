@@ -6,14 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:fitsSystemWindows="true"
+    android:background="@color/white"
     >
+<!--    android:backgroundTint="@color/white"-->
+<!--    android:backgroundTintMode="screen"-->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         app:statusBarForeground="#CDFFFFFF"
-        app:elevation="0dp"
-
+        app:elevation="-5dp"
+        android:elevation="-5dp"
+        android:background="@null"
+        android:layout_marginTop="-75dp"
         >
 <!--        app:layout_scrollFlags="noScroll"-->
 <!--        app:layout_scrollFlags="scroll|enterAlways"-->
@@ -24,7 +29,7 @@
             android:layout_height="50dp"
             app:layout_scrollFlags="scroll|enterAlways"
             android:background="@drawable/toolbar_ripple"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="85dp"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginBottom="1dp"
