@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:fitsSystemWindows="true"
-    android:background="@color/white"
     >
 <!--    android:backgroundTint="@color/white"-->
 <!--    android:backgroundTintMode="screen"-->
@@ -15,14 +14,8 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         app:statusBarForeground="#CDFFFFFF"
-        app:elevation="-5dp"
-        android:elevation="-5dp"
-        android:background="@null"
         android:layout_marginTop="-75dp"
         >
-<!--        app:layout_scrollFlags="noScroll"-->
-<!--        app:layout_scrollFlags="scroll|enterAlways"-->
-<!--        android:layout_marginBottom="10dp"-->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -56,13 +49,6 @@
                 android:textAppearance="?attr/textAppearanceBody1"
                 android:visibility="gone"/>
         </com.google.android.material.appbar.MaterialToolbar>
-<!--        <com.google.android.material.appbar.MaterialToolbar-->
-<!--            android:id="@+id/toolbar_deleted_fragment"-->
-<!--            android:fitsSystemWindows="true"-->
-<!--            android:visibility="visible"-->
-<!--            android:layout_width="match_parent"-->
-<!--            app:layout_scrollFlags="noScroll"-->
-<!--            android:layout_height="?attr/actionBarSize"/>-->
     </com.google.android.material.appbar.AppBarLayout>
     <include layout="@layout/content_main"/>
     <com.google.android.material.bottomappbar.BottomAppBar
@@ -74,7 +60,6 @@
         app:fabAlignmentMode="end"
         app:elevation="3dp"
         android:fitsSystemWindows="true"
-        android:clipToPadding="false"
         />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
