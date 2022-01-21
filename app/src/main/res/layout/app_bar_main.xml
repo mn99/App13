@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:fitsSystemWindows="true"
     >
 <!--    android:backgroundTint="@color/white"-->
 <!--    android:backgroundTintMode="screen"-->
@@ -13,9 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        app:statusBarForeground="#CDFFFFFF"
         android:layout_marginTop="-75dp"
+        app:elevation="0dp"
+        android:background="#662196F3"
+        app:statusBarForeground="#CDFFFFFF"
         >
+<!--        ^^^^ -->
+<!--        app:statusBarForeground="#CDFFFFFF"-->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -34,7 +37,6 @@
             app:titleTextAppearance="?attr/textAppearanceBody1"
             app:contentInsetStartWithNavigation="0dp"
             android:visibility="visible"
-
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EnterSearchKeyword"
@@ -50,7 +52,7 @@
                 android:visibility="gone"/>
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
-    <include layout="@layout/content_main"/>
+    <include layout="@layout/content_main" />
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"
         android:layout_width="match_parent"
