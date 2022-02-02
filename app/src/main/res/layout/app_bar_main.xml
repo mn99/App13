@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:clipChildren="false"
+
     >
 <!--    android:backgroundTint="@color/white"-->
 <!--    android:backgroundTintMode="screen"-->
@@ -12,20 +14,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:layout_marginTop="-75dp"
         app:elevation="0dp"
-        android:background="#662196F3"
+        android:background="@null"
+        android:layout_marginVertical="-85dp"
         app:statusBarForeground="#CDFFFFFF"
+        android:clipChildren="false"
+
         >
 <!--        ^^^^ -->
+<!--        only works on lollipop when used together with-->
+<!--        android:fitssystemwindows="true" vvvv-->
 <!--        app:statusBarForeground="#CDFFFFFF"-->
+<!--        android:layout_marginTop="-75dp"-->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             app:layout_scrollFlags="scroll|enterAlways"
             android:background="@drawable/toolbar_ripple"
-            android:layout_marginTop="85dp"
+            android:layout_marginTop="1dp"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginBottom="1dp"
@@ -58,10 +65,13 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_gravity="bottom"
-        android:background="#CDFFFFFF"
+
+        android:backgroundTint="#CDFFFFFF"
+
         app:fabAlignmentMode="end"
         app:elevation="3dp"
         android:fitsSystemWindows="true"
+        android:forceHasOverlappingRendering="true"
         />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
