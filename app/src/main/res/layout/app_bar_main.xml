@@ -17,7 +17,7 @@
         app:elevation="0dp"
         android:background="@null"
         android:layout_marginVertical="-85dp"
-        app:statusBarForeground="#CDFFFFFF"
+        app:statusBarForeground="#43183C22"
         android:clipChildren="false"
 
         >
