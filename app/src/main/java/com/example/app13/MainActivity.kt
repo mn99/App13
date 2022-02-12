@@ -1,6 +1,7 @@
 package com.example.app13
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import com.google.android.material.snackbar.Snackbar
@@ -47,19 +48,18 @@ class MainActivity : AppCompatActivity() {
             binding.navView.setCheckedItem(destination.id)
             handleDestinationChange(destination)
         }
-//        binding.navView.setNavigationItemSelectedListener { item ->
-//            fragmentIdToLoad = item.itemId
-//            binding.drawerLayout.closeDrawer(GravityCompat.START, true)
-//            return@setNavigationItemSelectedListener true
-//        }
     }
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
+
+//        window.statusBarColor = Color.TRANSPARENT
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
     override fun onBackPressed() {
         if (binding.drawerLayout.isOpen) {
             binding.drawerLayout.closeDrawers()
+
+//            window.statusBarColor = Color.parseColor("#4D248038")
         } else {
             super.onBackPressed()
         }
