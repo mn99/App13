@@ -15,6 +15,7 @@ import android.text.style.URLSpan
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
+import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import com.example.app13.databinding.MenuItemBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -81,14 +82,20 @@ class Operation(val textId: Int, val drawableId: Int, val operation: () -> Unit)
 fun Fragment.showMenu(vararg operations: Operation) {
     val context = requireContext()
     val linearLayout = LinearLayout(context)
-//    linearLayout.setBackgroundColor(Color.parseColor("#2121FF"))
+
     linearLayout.orientation = LinearLayout.VERTICAL
     linearLayout.layoutParams = LinearLayout.LayoutParams(
         LinearLayout.LayoutParams.MATCH_PARENT,
         LinearLayout.LayoutParams.WRAP_CONTENT
     )
+
+    linearLayout.setBackgroundColor(Color.GRAY)
+    linearLayout.setPaddingRelative(0,0,0,100)
+//    (requireActivity() as MainActivity).window.setBackgroundDrawable(draw)
+
     val dialog = BottomSheetDialog(context)
     dialog.setContentView(linearLayout)
+
     for (operation in operations) {
         val item = MenuItemBinding.inflate(layoutInflater).root
         item.setText(operation.textId)

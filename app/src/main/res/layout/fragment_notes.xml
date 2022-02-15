@@ -17,12 +17,13 @@
             android:id="@+id/RecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/colorSurface"
+
             android:scrollbarStyle="outsideOverlay"
             android:scrollbars="vertical"
-
+            android:background="@android:color/transparent"
             android:paddingTop="175dp"
             android:paddingBottom="110dp"
             />
+<!--        android:background="?attr/colorSurface"-->
     </androidx.core.widget.NestedScrollView>
 </FrameLayout>

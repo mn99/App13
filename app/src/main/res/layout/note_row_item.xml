@@ -7,11 +7,10 @@
     android:layout_marginRight="5dp"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:background="@drawable/background_border_colored"
+    android:background="@drawable/note_rippled_background"
     android:elevation="3dp"
     android:padding="15dp"
-    android:id="@+id/note_item"
-    >
+    android:id="@+id/note_item">
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/TitleText"
         android:layout_width="wrap_content"
