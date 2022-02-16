@@ -18,6 +18,7 @@ import android.widget.LinearLayout
 import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import com.example.app13.databinding.MenuItemBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
 import java.util.*
@@ -89,12 +90,15 @@ fun Fragment.showMenu(vararg operations: Operation) {
         LinearLayout.LayoutParams.WRAP_CONTENT
     )
 
-    linearLayout.setBackgroundColor(Color.GRAY)
-    linearLayout.setPaddingRelative(0,0,0,100)
-//    (requireActivity() as MainActivity).window.setBackgroundDrawable(draw)
+    linearLayout.setBackgroundColor(Color.parseColor("#b6d7a8"))
+    linearLayout.setPaddingRelative(0,0,0,200)
 
     val dialog = BottomSheetDialog(context)
     dialog.setContentView(linearLayout)
+
+    val modalBottomSheetDialog = dialog.behavior
+    modalBottomSheetDialog.peekHeight = 325
+    modalBottomSheetDialog.isDraggable = false
 
     for (operation in operations) {
         val item = MenuItemBinding.inflate(layoutInflater).root
