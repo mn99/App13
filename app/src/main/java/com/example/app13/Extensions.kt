@@ -15,10 +15,8 @@ import android.text.style.URLSpan
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
-import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import com.example.app13.databinding.MenuItemBinding
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
 import java.util.*

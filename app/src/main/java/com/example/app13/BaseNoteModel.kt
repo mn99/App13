@@ -53,7 +53,7 @@ class BaseNoteModel(private val app: Application) : AndroidViewModel(app) {
                     stream.write(requireNotNull(currentFile).readBytes())
                 }
             }
-            Toast.makeText(app, R.string.saved_to_device, Toast.LENGTH_LONG).show()
+//            Toast.makeText(app, R.string.saved_to_device, Toast.LENGTH_LONG).show()
         }
     }
     fun restoreBaseNote(id: Long) = executeAsync { baseNoteDao.moveBaseNote(id, Folder.NOTES) }
@@ -63,9 +63,24 @@ class BaseNoteModel(private val app: Application) : AndroidViewModel(app) {
     fun deleteBaseNoteForever(baseNote: BaseNote) = executeAsync { baseNoteDao.deleteBaseNote(baseNote) }
     private fun getPreviousNotes(): List<BaseNote> {
         val previousNotes = ArrayList<BaseNote>()
-        getNotePath().listFiles()?.mapTo(previousNotes, { file -> XMLUtils.readBaseNoteFromFile(file, Folder.NOTES) })
-        getDeletedPath().listFiles()?.mapTo(previousNotes, { file -> XMLUtils.readBaseNoteFromFile(file, Folder.DELETED) })
-        getArchivedPath().listFiles()?.mapTo(previousNotes, { file -> XMLUtils.readBaseNoteFromFile(file, Folder.ARCHIVED) })
+        getNotePath().listFiles()?.mapTo(previousNotes) { file ->
+            XMLUtils.readBaseNoteFromFile(
+                file,
+                Folder.NOTES
+            )
+        }
+        getDeletedPath().listFiles()?.mapTo(previousNotes) { file ->
+            XMLUtils.readBaseNoteFromFile(
+                file,
+                Folder.DELETED
+            )
+        }
+        getArchivedPath().listFiles()?.mapTo(previousNotes) { file ->
+            XMLUtils.readBaseNoteFromFile(
+                file,
+                Folder.ARCHIVED
+            )
+        }
         return previousNotes
     }
     private fun getNotePath() = getFolder("notes")

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:fitsSystemWindows="false"
     android:layout_height="match_parent"
+    android:paddingTop="115dp"
     >
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -12,12 +13,15 @@
         android:scrollbars="vertical"
         >
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecyclerView"
+            android:id="@+id/RecyclerViewSecondary"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:background="@android:color/transparent"
-            android:paddingTop="175dp"
-            android:paddingBottom="110dp"
+
             />
+<!--        android:paddingTop="175dp"-->
+<!--        android:paddingBottom="110dp"-->
+        <!--        android:background="?attr/colorSurface"-->
     </androidx.core.widget.NestedScrollView>
 </FrameLayout>

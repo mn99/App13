@@ -9,7 +9,8 @@
     android:layout_marginTop="-175dp"
     android:elevation="-1dp"
     >
-<!--    -175dp is to align first note with top of the screen below the status bar-->
+<!--    layout behavior for scrolling appbar is here -->
+<!--    -175dp is to make notes scroll under toolbar aesthetically proper-->
     <fragment
         android:id="@+id/nav_host_fragment_content_main"
         android:name="androidx.navigation.fragment.NavHostFragment"

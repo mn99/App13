@@ -15,12 +15,11 @@
         android:layout_height="60dp"
         android:foreground="#CDFFFFFF"
         android:elevation="1dp"
+        android:id="@+id/cosmetic_view"
         />
-<!--    android:foreground="#CDFFFFFF"-->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         app:elevation="0dp"
-
         android:layout_height="wrap_content"
         android:paddingTop="-25dp"
         android:background="@null"
@@ -41,25 +40,49 @@
             app:title="Search your notes"
             app:titleTextAppearance="?attr/textAppearanceBody1"
             app:contentInsetStartWithNavigation="0dp"
-            android:visibility="visible"
-
             android:layout_height="50dp"
             android:layout_marginTop="71dp"
+
+            android:visibility="gone"
             >
+
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbarSearch"
+
+            android:layout_marginLeft="-16dp"
+
+            android:visibility="visible">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EnterSearchKeyword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@null"
+                android:background="@color/teal_200"
                 android:hint="@string/search"
                 android:imeOptions="actionDone"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingTop="140dp"
+                android:paddingBottom="20dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:singleLine="true"
                 android:textAppearance="?attr/textAppearanceBody1"
-                android:visibility="gone"/>
+                android:layout_gravity="top"
+                android:fitsSystemWindows="false"
+                app:endIconMode="clear_text"
+                />
+<!--            android:drawableEnd="@drawable/x_clear"-->
         </com.google.android.material.appbar.MaterialToolbar>
+
+
+
     </com.google.android.material.appbar.AppBarLayout>
+
+
+
     <include layout="@layout/content_main" />
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"

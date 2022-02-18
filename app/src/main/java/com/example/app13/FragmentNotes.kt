@@ -80,13 +80,15 @@ class FragmentNotes : Fragment(), ItemListener {
     }
     private fun getObservable() = model.baseNotes
     private fun setupObserver() {
-        getObservable().observe(viewLifecycleOwner, { list ->
+        getObservable().observe(viewLifecycleOwner) { list ->
             adapter?.submitList(list)
             binding?.RecyclerView?.isVisible = list.isNotEmpty()
-        })
+        }
     }
     private fun displayNoteTypes() {
         val takeNote = Operation(R.string.take_note, R.drawable.edit) { goToActivity(TakeNote::class.java) }
         showMenu(takeNote)
     }
+
+
 }
