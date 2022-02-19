@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -58,7 +59,6 @@ class FragmentSearch : Fragment(), ItemListener {
         setupRecyclerView()
         setupObserver()
         setHasOptionsMenu(true)
-
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentNotesSecondaryBinding.inflate(inflater)
@@ -71,9 +71,6 @@ class FragmentSearch : Fragment(), ItemListener {
             }
         }
     }
-
-
-
     private fun setupObserver() {
         getObservable().observe(viewLifecycleOwner) { list ->
             adapter?.submitList(list)
@@ -84,5 +81,4 @@ class FragmentSearch : Fragment(), ItemListener {
         binding?.RecyclerViewSecondary?.layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
     }
     private fun getObservable() = model.searchResults
-
 }

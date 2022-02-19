@@ -51,13 +51,14 @@ class MainActivity : AppCompatActivity() {
             binding.navView.setCheckedItem(destination.id)
             handleDestinationChange(destination)
         }
-
         binding.appBarMain.toolbar.setOnClickListener {
             navController.navigate(R.id.NotesToSearch)
         }
-
+        binding.appBarMain.searchLayout.setStartIconOnClickListener {
+            hideSoftKeyboard(binding.appBarMain.EnterSearchKeyword)
+            super.onBackPressed()
+        }
         setupSearch()
-
     }
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -76,12 +77,14 @@ class MainActivity : AppCompatActivity() {
                 binding.appBarMain.fab.show()
                 binding.appBarMain.cosmeticView.setBackgroundColor(Color.parseColor("#CDFFFFFF"))
                 binding.appBarMain.bottomAppBar.performShow()
+//                binding.appBarMain.cosmeticView.elevation = 1F
             }
             R.id.nav_search -> {
                 binding.appBarMain.fab.hide()
                 binding.appBarMain.bottomAppBar.performHide()
                 binding.appBarMain.cosmeticView.setBackgroundColor(Color.WHITE)
                 showSoftKeyboard(binding.appBarMain.EnterSearchKeyword)
+//                binding.appBarMain.cosmeticView.elevation = 0F
             }
             else -> {
                 binding.appBarMain.fab.hide()
@@ -102,10 +105,16 @@ class MainActivity : AppCompatActivity() {
             model.keyword = text?.trim()?.toString() ?: String()
         })
     }
-    fun showSoftKeyboard(view: View) {
+    private fun showSoftKeyboard(view: View) {
         if (view.requestFocus()) {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+        }
+    }
+    private fun hideSoftKeyboard(view: View) {
+        if (view.requestFocus()) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 }

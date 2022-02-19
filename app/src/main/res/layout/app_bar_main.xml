@@ -53,27 +53,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/toolbarSearch"
-
             android:layout_marginLeft="-16dp"
-
-            android:visibility="visible">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/EnterSearchKeyword"
+            android:visibility="visible"
+            android:paddingTop="60dp"
+            android:elevation="2dp"
+            >
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/search_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/teal_200"
-                android:hint="@string/search"
-                android:imeOptions="actionDone"
-                android:paddingTop="140dp"
-                android:paddingBottom="20dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                app:endIconDrawable="@drawable/x_clear"
+                app:endIconMode="clear_text"
                 android:singleLine="true"
                 android:textAppearance="?attr/textAppearanceBody1"
-                android:layout_gravity="top"
                 android:fitsSystemWindows="false"
-                app:endIconMode="clear_text"
-                />
+                android:layout_gravity="top"
+                android:imeOptions="actionDone"
+                app:hintEnabled="true"
+                android:hint="@string/search"
+                app:hintTextColor="#8E8E8E"
+                app:startIconDrawable="@drawable/arrow_left"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/EnterSearchKeyword"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:attr/actionBarSize"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/white"
+                    android:textCursorDrawable="@null"
+                    />
+<!--                android:paddingTop="10dp"-->
+<!--                android:paddingBottom="80dp"-->
+<!--                android:paddingStart="10dp"-->
+<!--                android:paddingEnd="10dp"-->
+            </com.google.android.material.textfield.TextInputLayout>
+<!--            android:drawableEnd="@drawable/x_clear"-->
 <!--            android:drawableEnd="@drawable/x_clear"-->
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -82,8 +97,8 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-
     <include layout="@layout/content_main" />
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"
         android:layout_width="match_parent"
