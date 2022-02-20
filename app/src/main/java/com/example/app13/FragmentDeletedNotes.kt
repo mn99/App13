@@ -41,17 +41,13 @@ class FragmentDeletedNotes : Fragment(), ItemListener {
     }
     private fun getObservable() = model.deletedNotes
     private fun setupObserver() {
-        getObservable().observe(viewLifecycleOwner, { list ->
+        getObservable().observe(viewLifecycleOwner) { list ->
             adapter?.submitList(list)
             binding?.RecyclerViewDeleted?.isVisible = list.isNotEmpty()
-        })
+        }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentDeletedNotesBinding.inflate(inflater)
-//        (requireActivity() as MainActivity).binding.appBarMain.toolbar
-//        (requireActivity() as MainActivity).supportActionBar!!.
-//        val defaultToolbar = (requireContext() as MainActivity).binding.appBarMain.toolbar
-//        val currentToolbar = (requireContext() as MainActivity).binding.appBarMain.toolbarDeletedFragment
         return binding?.root
     }
 

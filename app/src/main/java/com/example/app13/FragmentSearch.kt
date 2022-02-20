@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -12,11 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.app13.databinding.FragmentNotesBinding
-import com.example.app13.databinding.FragmentNotesSecondaryBinding
+import com.example.app13.databinding.FragmentSearchNotesBinding
 
 class FragmentSearch : Fragment(), ItemListener {
-    private var binding: FragmentNotesSecondaryBinding? = null
+    private var binding: FragmentSearchNotesBinding? = null
     private var adapter: BaseNoteAdapter? = null
     private val model: BaseNoteModel by activityViewModels()
     override fun onClick(position: Int) {
@@ -61,7 +59,7 @@ class FragmentSearch : Fragment(), ItemListener {
         setHasOptionsMenu(true)
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentNotesSecondaryBinding.inflate(inflater)
+        binding = FragmentSearchNotesBinding.inflate(inflater)
         return binding?.root
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

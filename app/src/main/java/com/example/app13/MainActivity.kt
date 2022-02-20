@@ -77,22 +77,22 @@ class MainActivity : AppCompatActivity() {
                 binding.appBarMain.fab.show()
                 binding.appBarMain.cosmeticView.setBackgroundColor(Color.parseColor("#CDFFFFFF"))
                 binding.appBarMain.bottomAppBar.performShow()
-//                binding.appBarMain.cosmeticView.elevation = 1F
             }
             R.id.nav_search -> {
                 binding.appBarMain.fab.hide()
                 binding.appBarMain.bottomAppBar.performHide()
                 binding.appBarMain.cosmeticView.setBackgroundColor(Color.WHITE)
                 showSoftKeyboard(binding.appBarMain.EnterSearchKeyword)
-//                binding.appBarMain.cosmeticView.elevation = 0F
             }
             else -> {
                 binding.appBarMain.fab.hide()
                 binding.appBarMain.cosmeticView.setBackgroundColor(Color.WHITE)
             }
         }
+
         binding.appBarMain.toolbar.isVisible = (destination.id == R.id.nav_notes)
         binding.appBarMain.toolbarSearch.isVisible = (destination.id == R.id.nav_search)
+
     }
     private fun goToActivity(activity: Class<*>, baseNote: BaseNote? = null) {
         val intent = Intent(this, activity)
