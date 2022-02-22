@@ -5,22 +5,13 @@
     android:layout_height="match_parent"
     android:id="@+id/deleted_notes_layout"
     >
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/black"
-        >
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"/>
 
-    </com.google.android.material.appbar.AppBarLayout>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:scrollbars="vertical"
-        android:paddingTop="175dp"
+        android:paddingTop="125dp"
         >
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RecyclerViewDeleted"
