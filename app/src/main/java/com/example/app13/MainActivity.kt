@@ -20,6 +20,7 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.NavDestination
 import com.example.app13.databinding.ActivityMainBinding
+import com.google.android.material.appbar.MaterialToolbar
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -60,10 +61,10 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        binding.appBarMain.toolbarNormal.setNavigationOnClickListener {
-            val navController = findNavController(R.id.nav_host_fragment_content_main)
-            navController.navigateUp(appBarConfiguration)
-        }
+//        binding.appBarMain.toolbarNormal.setNavigationOnClickListener {
+//            val navController = findNavController(R.id.nav_host_fragment_content_main)
+//            navController.navigateUp(appBarConfiguration)
+//        }
 
 
         setupSearch()
@@ -97,7 +98,9 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_deleted -> {
                 binding.appBarMain.fab.hide()
                 binding.appBarMain.bottomAppBar.performHide()
-                binding.appBarMain.cosmeticView.setBackgroundColor(Color.BLACK)
+                binding.appBarMain.cosmeticView.setBackgroundColor(Color.WHITE)
+//                binding.appBarMain.toolbarNormal.title = "Deleted"
+//                binding.appBarMain.toolbarNormal.inflateMenu(R.menu.delete_all)
             }
 
 
@@ -110,8 +113,10 @@ class MainActivity : AppCompatActivity() {
         }
         binding.appBarMain.toolbar.isVisible = (destination.id == R.id.nav_notes)
         binding.appBarMain.toolbarSearch.isVisible = (destination.id == R.id.nav_search)
+//        binding.appBarMain.toolbarNormal.isVisible = (destination.id == R.id.nav_deleted) || (destination.id == R.id.nav_archived)
         binding.appBarMain.toolbarNormal.isVisible = (destination.id == R.id.nav_deleted) || (destination.id == R.id.nav_archived)
     }
+
     private fun goToActivity(activity: Class<*>, baseNote: BaseNote? = null) {
         val intent = Intent(this, activity)
         intent.putExtra(Constants.SelectedBaseNote, baseNote)

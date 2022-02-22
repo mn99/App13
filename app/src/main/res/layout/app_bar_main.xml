@@ -79,23 +79,60 @@
                     />
             </com.google.android.material.textfield.TextInputLayout>
         </com.google.android.material.appbar.MaterialToolbar>
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:layout_width="match_parent"
-            android:visibility="visible"
-            android:id="@+id/toolbar_normal"
-            android:fitsSystemWindows="false"
-            android:elevation="2dp"
-            android:background="@color/white"
-            app:title="Deleted"
-            app:contentInsetStartWithNavigation="0dp"
-            app:navigationIcon="@drawable/bars_horizontal"
-            android:gravity="bottom"
-            android:layout_height="120dp"
-            android:paddingTop="65dp"
-            android:paddingBottom="10dp"
-            />
+<!--        <com.google.android.material.appbar.MaterialToolbar-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="165dp"-->
+<!--            android:id="@+id/toolbar_normal"-->
+<!--            app:navigationIcon="@drawable/bars_horizontal"-->
+<!--            android:paddingTop="65dp"-->
+<!--            android:paddingBottom="3dp"-->
+<!--            android:gravity="bottom"-->
+<!--            app:title="Deleted"-->
+<!--            />-->
+<!--        <com.google.android.material.appbar.MaterialToolbar-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:visibility="visible"-->
+<!--            android:id="@+id/toolbar_normal"-->
+<!--            android:fitsSystemWindows="false"-->
+<!--            android:elevation="2dp"-->
+<!--            android:background="@color/white"-->
+<!--            app:contentInsetStartWithNavigation="0dp"-->
+<!--            app:navigationIcon="@drawable/bars_horizontal"-->
+<!--            android:gravity="bottom"-->
+<!--            android:layout_height="120dp"-->
+<!--            android:paddingTop="65dp"-->
+<!--            android:paddingBottom="3dp"-->
+<!--            />-->
+<!--        app:menu="@menu/delete_all"-->
+<!--        app:title="Deleted"-->
     </com.google.android.material.appbar.AppBarLayout>
+
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:id="@+id/app_bar_secondary"
+        android:fitsSystemWindows="false"
+        android:visibility="gone"
+        >
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:id="@+id/toolbar_normal"
+                app:navigationIcon="@drawable/bars_horizontal"
+                android:paddingTop="65dp"
+                android:paddingBottom="3dp"
+                android:gravity="bottom"
+                app:title="Deleted"
+                android:background="@color/black"
+                app:layout_scrollFlags="enterAlwaysCollapsed"
+                android:visibility="gone"
+                />
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
     <include layout="@layout/content_main" />
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"

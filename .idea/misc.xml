@@ -34,7 +34,7 @@
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/drawable/x_clear.xml" value="0.1625" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/layout/activity_add_note.xml" value="0.2971014492753623" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/layout/activity_main.xml" value="0.3079710144927536" />
-        <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/layout/app_bar_main.xml" value="0.16" />
+        <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/layout/app_bar_main.xml" value="0.2" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/layout/bottom_sheet.xml" value="0.23425925925925925" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/layout/bottom_sheet_dialog.xml" value="0.4148550724637681" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/layout/content_main.xml" value="0.33" />
@@ -49,7 +49,7 @@
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/layout/note_row_item.xml" value="0.2674772036474164" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/menu/activity_main_drawer.xml" value="0.328125" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/menu/archived.xml" value="0.55" />
-        <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/menu/delete_all.xml" value="0.4638888888888889" />
+        <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/menu/delete_all.xml" value="0.264" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/menu/deleted.xml" value="0.55" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/menu/formatting.xml" value="0.328125" />
         <entry key="..\:/Users/Minh/AndroidStudioProjects/App13/app/src/main/res/menu/main.xml" value="0.55" />

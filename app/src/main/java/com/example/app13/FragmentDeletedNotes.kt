@@ -55,8 +55,6 @@ class FragmentDeletedNotes : Fragment(), ItemListener {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.delete_all, menu)
-//        val currentToolbar = ((context as MainActivity).binding.appBarMain.toolbar)
-//        currentToolbar.title = "Deleted"
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == Constants.RequestCodeExportFile && resultCode == Activity.RESULT_OK) {
