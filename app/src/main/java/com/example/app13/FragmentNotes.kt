@@ -52,7 +52,6 @@ class FragmentNotes : Fragment(), ItemListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNotesBinding.inflate(inflater)
-//        (requireActivity() as MainActivity).supportActionBar!!.show()
         return binding?.root
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -5,10 +5,8 @@
     android:layout_width="match_parent"
     tools:context=".MainActivity"
     android:layout_height="match_parent"
-
     android:background="@android:color/transparent"
     android:fitsSystemWindows="false"
-
     >
     <View
         android:layout_width="match_parent"
@@ -42,19 +40,15 @@
             app:contentInsetStartWithNavigation="0dp"
             android:layout_height="50dp"
             android:layout_marginTop="71dp"
-
             android:visibility="gone"
             >
-
-
         </com.google.android.material.appbar.MaterialToolbar>
-
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/toolbarSearch"
             android:layout_marginLeft="-16dp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:paddingTop="60dp"
             android:elevation="2dp"
             >
@@ -73,8 +67,8 @@
                 android:hint="@string/search"
                 app:hintTextColor="#8E8E8E"
                 app:startIconDrawable="@drawable/arrow_left"
+                android:paddingStart="3dp"
                 >
-
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/EnterSearchKeyword"
                     android:layout_width="match_parent"
@@ -83,22 +77,29 @@
                     android:background="@color/white"
                     android:textCursorDrawable="@null"
                     />
-<!--                android:paddingTop="10dp"-->
-<!--                android:paddingBottom="80dp"-->
-<!--                android:paddingStart="10dp"-->
-<!--                android:paddingEnd="10dp"-->
             </com.google.android.material.textfield.TextInputLayout>
-<!--            android:drawableEnd="@drawable/x_clear"-->
-<!--            android:drawableEnd="@drawable/x_clear"-->
         </com.google.android.material.appbar.MaterialToolbar>
 
 
+<!--        <com.google.android.material.appbar.MaterialToolbar-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="?android:attr/actionBarSize"-->
+<!--            android:visibility="visible"-->
+<!--            android:id="@+id/toolbar_normal"-->
+<!--            android:fitsSystemWindows="false"-->
+<!--            android:elevation="2dp"-->
+<!--            android:background="@color/white"-->
+<!--            app:title="Deleted"-->
+<!--            app:contentInsetStartWithNavigation="0dp"-->
+<!--            app:navigationIcon="@drawable/bars_horizontal"-->
+<!--            android:gravity="center_horizontal"-->
+
+<!--            android:layout_marginTop="125dp"-->
+<!--            />-->
+
 
     </com.google.android.material.appbar.AppBarLayout>
-
-
     <include layout="@layout/content_main" />
-
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"
         android:layout_width="match_parent"
@@ -106,10 +107,8 @@
         android:layout_gravity="bottom"
         app:fabAlignmentMode="end"
         app:elevation="3dp"
-
         android:backgroundTint="#CDFFFFFF"
         />
-<!--    CDFFFFFF-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

@@ -48,12 +48,12 @@ class FragmentSearch : Fragment(), ItemListener {
         adapter?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                 if (itemCount > 0) {
-                    binding?.RecyclerViewSecondary?.scrollToPosition(positionStart)
+                    binding?.RecyclerViewSearch?.scrollToPosition(positionStart)
                 }
             }
         })
-        binding?.RecyclerViewSecondary?.adapter = adapter
-        binding?.RecyclerViewSecondary?.setHasFixedSize(true)
+        binding?.RecyclerViewSearch?.adapter = adapter
+        binding?.RecyclerViewSearch?.setHasFixedSize(true)
         setupRecyclerView()
         setupObserver()
         setHasOptionsMenu(true)
@@ -72,11 +72,11 @@ class FragmentSearch : Fragment(), ItemListener {
     private fun setupObserver() {
         getObservable().observe(viewLifecycleOwner) { list ->
             adapter?.submitList(list)
-            binding?.RecyclerViewSecondary?.isVisible = list.isNotEmpty()
+            binding?.RecyclerViewSearch?.isVisible = list.isNotEmpty()
         }
     }
     private fun setupRecyclerView() {
-        binding?.RecyclerViewSecondary?.layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
+        binding?.RecyclerViewSearch?.layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
     }
     private fun getObservable() = model.searchResults
 }

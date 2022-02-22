@@ -13,14 +13,10 @@
         android:scrollbars="vertical"
         >
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecyclerViewSecondary"
+            android:id="@+id/RecyclerViewSearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
-
             />
-<!--        android:paddingTop="175dp"-->
-<!--        android:paddingBottom="110dp"-->
-        <!--        android:background="?attr/colorSurface"-->
     </androidx.core.widget.NestedScrollView>
 </FrameLayout>

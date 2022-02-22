@@ -58,6 +58,14 @@ class MainActivity : AppCompatActivity() {
             hideSoftKeyboard(binding.appBarMain.EnterSearchKeyword)
             super.onBackPressed()
         }
+
+
+//        binding.appBarMain.toolbarNormal.setNavigationOnClickListener {
+//            val navController = findNavController(R.id.nav_host_fragment_content_main)
+//            navController.navigateUp(appBarConfiguration)
+//        }
+
+
         setupSearch()
     }
     override fun onSupportNavigateUp(): Boolean {
@@ -84,15 +92,25 @@ class MainActivity : AppCompatActivity() {
                 binding.appBarMain.cosmeticView.setBackgroundColor(Color.WHITE)
                 showSoftKeyboard(binding.appBarMain.EnterSearchKeyword)
             }
+
+
+            R.id.nav_deleted -> {
+                binding.appBarMain.fab.hide()
+                binding.appBarMain.bottomAppBar.performHide()
+                binding.appBarMain.cosmeticView.setBackgroundColor(Color.TRANSPARENT)
+            }
+
+
             else -> {
                 binding.appBarMain.fab.hide()
+//                binding.appBarMain.cosmeticView.setBackgroundColor(Color.TRANSPARENT)
                 binding.appBarMain.cosmeticView.setBackgroundColor(Color.WHITE)
+
             }
         }
-
         binding.appBarMain.toolbar.isVisible = (destination.id == R.id.nav_notes)
         binding.appBarMain.toolbarSearch.isVisible = (destination.id == R.id.nav_search)
-
+//        binding.appBarMain.toolbarNormal.isVisible = (destination.id == R.id.nav_deleted) || (destination.id == R.id.nav_archived)
     }
     private fun goToActivity(activity: Class<*>, baseNote: BaseNote? = null) {
         val intent = Intent(this, activity)

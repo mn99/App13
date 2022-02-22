@@ -44,10 +44,10 @@ class FragmentArchivedNotes : Fragment(), ItemListener {
     }
     private fun getObservable() = model.archivedNotes
     private fun setupObserver() {
-        getObservable().observe(viewLifecycleOwner, { list ->
+        getObservable().observe(viewLifecycleOwner) { list ->
             adapter?.submitList(list)
             binding?.RecyclerView?.isVisible = list.isNotEmpty()
-        })
+        }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentNotesBinding.inflate(inflater)

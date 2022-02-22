@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.app13.databinding.FragmentDeletedNotesBinding
+import com.example.app13.databinding.FragmentNotesBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class FragmentDeletedNotes : Fragment(), ItemListener {
@@ -32,12 +33,13 @@ class FragmentDeletedNotes : Fragment(), ItemListener {
         })
         binding?.RecyclerViewDeleted?.adapter = adapter
         binding?.RecyclerViewDeleted?.setHasFixedSize(true)
+        binding?.deletedNotesLayout?.fitsSystemWindows = true
         setupRecyclerView()
         setupObserver()
         setHasOptionsMenu(true)
     }
     private fun setupRecyclerView() {
-        binding?.RecyclerViewDeleted?.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
+        binding?.RecyclerViewDeleted?.layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
     }
     private fun getObservable() = model.deletedNotes
     private fun setupObserver() {
