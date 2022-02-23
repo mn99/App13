@@ -28,9 +28,10 @@ class MainActivity : AppCompatActivity() {
     private val model: BaseNoteModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.root.isSaveFromParentEnabled = false
+//        binding.root.isSaveFromParentEnabled = false
         setSupportActionBar(binding.appBarMain.toolbar)
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         binding.appBarMain.fab.setOnClickListener { _ ->
             goToActivity(TakeNote::class.java)
         }
@@ -61,10 +62,10 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-//        binding.appBarMain.toolbarNormal.setNavigationOnClickListener {
-//            val navController = findNavController(R.id.nav_host_fragment_content_main)
-//            navController.navigateUp(appBarConfiguration)
-//        }
+        binding.appBarMain.toolbarNormal.setNavigationOnClickListener {
+            val navController = findNavController(R.id.nav_host_fragment_content_main)
+            navController.navigateUp(appBarConfiguration)
+        }
 
 
         setupSearch()
@@ -114,6 +115,7 @@ class MainActivity : AppCompatActivity() {
         binding.appBarMain.toolbar.isVisible = (destination.id == R.id.nav_notes)
         binding.appBarMain.toolbarSearch.isVisible = (destination.id == R.id.nav_search)
 //        binding.appBarMain.toolbarNormal.isVisible = (destination.id == R.id.nav_deleted) || (destination.id == R.id.nav_archived)
+//        binding.appBarMain.appBarSecondary.isVisible = (destination.id == R.id.nav_deleted) || (destination.id == R.id.nav_archived)
         binding.appBarMain.toolbarNormal.isVisible = (destination.id == R.id.nav_deleted) || (destination.id == R.id.nav_archived)
     }
 
