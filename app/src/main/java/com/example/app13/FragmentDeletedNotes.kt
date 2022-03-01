@@ -36,7 +36,7 @@ class FragmentDeletedNotes : Fragment(), ItemListener {
         binding?.deletedNotesLayout?.fitsSystemWindows = true
         setupRecyclerView()
         setupObserver()
-        setHasOptionsMenu(true)
+//        setHasOptionsMenu(true)
     }
     private fun setupRecyclerView() {
         binding?.RecyclerViewDeleted?.layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
@@ -53,9 +53,10 @@ class FragmentDeletedNotes : Fragment(), ItemListener {
         return binding?.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.delete_all, menu)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        menu.clear()
+//        inflater.inflate(R.menu.archived, menu)
+//    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == Constants.RequestCodeExportFile && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->

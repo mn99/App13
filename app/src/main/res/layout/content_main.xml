@@ -8,6 +8,7 @@
     tools:showIn="@layout/app_bar_main"
     android:layout_marginTop="-175dp"
     android:elevation="-1dp"
+    android:id="@+id/scrolling_behavior_main"
     >
 <!--    layout behavior for scrolling appbar is here -->
 <!--    -175dp is to make notes scroll under toolbar aesthetically proper-->

@@ -35,7 +35,6 @@ class FragmentNotes : Fragment(), ItemListener {
         binding?.RecyclerView?.setHasFixedSize(true)
         setupRecyclerView()
         setupObserver()
-        setHasOptionsMenu(true)
     }
     override fun onClick(position: Int) {
         adapter?.currentList?.get(position)?.let { baseNote ->

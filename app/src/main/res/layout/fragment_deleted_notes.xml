@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:scrollbars="vertical"
-        android:paddingTop="150dp"
+        android:paddingTop="74dp"
         android:elevation="1dp"
         >
         <androidx.recyclerview.widget.RecyclerView

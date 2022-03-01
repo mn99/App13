@@ -81,17 +81,38 @@
         </com.google.android.material.appbar.MaterialToolbar>
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
-            android:layout_height="145dp"
-            android:id="@+id/toolbar_normal"
+
+            android:id="@+id/toolbar_deleted"
             app:navigationIcon="@drawable/bars_horizontal"
             android:paddingTop="0dp"
-            android:background="@color/teal_200"
+            android:background="@color/white"
 
-            android:paddingBottom="10dp"
-            app:buttonGravity="bottom"
-            android:gravity="bottom"
+            android:layout_marginTop="65dp"
+
+            android:layout_height="60dp"
+            app:buttonGravity="center_vertical"
+            android:gravity="center_vertical"
             app:title="Deleted"
+            app:layout_scrollFlags="enterAlways"
             app:menu="@menu/delete_all"
+            />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+
+            android:id="@+id/toolbar_archived"
+            app:navigationIcon="@drawable/bars_horizontal"
+            android:paddingTop="0dp"
+            android:background="@color/white"
+
+            android:layout_marginTop="65dp"
+
+            android:layout_height="60dp"
+            app:buttonGravity="center_vertical"
+            android:gravity="center_vertical"
+            app:title="Archived"
+            app:layout_scrollFlags="enterAlways"
+            app:menu="@menu/archived"
+            android:visibility="gone"
             />
 <!--        <com.google.android.material.appbar.MaterialToolbar-->
 <!--            android:layout_width="match_parent"-->

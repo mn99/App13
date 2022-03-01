@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
@@ -15,11 +16,15 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.WindowCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.navigation.NavDestination
 import com.example.app13.databinding.ActivityMainBinding
+import com.example.app13.databinding.ContentMainBinding
 import com.google.android.material.appbar.MaterialToolbar
 
 class MainActivity : AppCompatActivity() {
@@ -31,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        binding.root.isSaveFromParentEnabled = false
         setSupportActionBar(binding.appBarMain.toolbar)
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -60,14 +64,12 @@ class MainActivity : AppCompatActivity() {
             hideSoftKeyboard(binding.appBarMain.EnterSearchKeyword)
             super.onBackPressed()
         }
-
-
-        binding.appBarMain.toolbarNormal.setNavigationOnClickListener {
-            val navController = findNavController(R.id.nav_host_fragment_content_main)
+        binding.appBarMain.toolbarDeleted.setNavigationOnClickListener {
             navController.navigateUp(appBarConfiguration)
         }
-
-
+        binding.appBarMain.toolbarArchived.setNavigationOnClickListener {
+            navController.navigateUp(appBarConfiguration)
+        }
         setupSearch()
     }
     override fun onSupportNavigateUp(): Boolean {
@@ -91,7 +93,7 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_search -> {
                 binding.appBarMain.fab.hide()
                 binding.appBarMain.bottomAppBar.performHide()
-                binding.appBarMain.cosmeticView.setBackgroundColor(Color.WHITE)
+                binding.appBarMain.cosmeticView.setBackgroundColor(Color.TRANSPARENT)
                 showSoftKeyboard(binding.appBarMain.EnterSearchKeyword)
             }
 
@@ -99,11 +101,13 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_deleted -> {
                 binding.appBarMain.fab.hide()
                 binding.appBarMain.bottomAppBar.performHide()
-                binding.appBarMain.cosmeticView.setBackgroundColor(Color.WHITE)
-//                binding.appBarMain.toolbarNormal.title = "Deleted"
-//                binding.appBarMain.toolbarNormal.inflateMenu(R.menu.delete_all)
+                binding.appBarMain.cosmeticView.setBackgroundColor(Color.TRANSPARENT)
             }
-
+            R.id.nav_archived -> {
+                binding.appBarMain.fab.hide()
+                binding.appBarMain.bottomAppBar.performHide()
+                binding.appBarMain.cosmeticView.setBackgroundColor(Color.TRANSPARENT)
+            }
 
             else -> {
                 binding.appBarMain.fab.hide()
@@ -114,9 +118,8 @@ class MainActivity : AppCompatActivity() {
         }
         binding.appBarMain.toolbar.isVisible = (destination.id == R.id.nav_notes)
         binding.appBarMain.toolbarSearch.isVisible = (destination.id == R.id.nav_search)
-//        binding.appBarMain.toolbarNormal.isVisible = (destination.id == R.id.nav_deleted) || (destination.id == R.id.nav_archived)
-//        binding.appBarMain.appBarSecondary.isVisible = (destination.id == R.id.nav_deleted) || (destination.id == R.id.nav_archived)
-        binding.appBarMain.toolbarNormal.isVisible = (destination.id == R.id.nav_deleted) || (destination.id == R.id.nav_archived)
+        binding.appBarMain.toolbarDeleted.isVisible = (destination.id == R.id.nav_deleted)
+        binding.appBarMain.toolbarArchived.isVisible = (destination.id == R.id.nav_archived)
     }
 
     private fun goToActivity(activity: Class<*>, baseNote: BaseNote? = null) {
