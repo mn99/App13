@@ -3,15 +3,14 @@ package com.example.app13
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.app13.databinding.FragmentNotesBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class FragmentNotes : Fragment(), ItemListener {
     private var binding: FragmentNotesBinding? = null
@@ -44,7 +43,6 @@ class FragmentNotes : Fragment(), ItemListener {
             }
         }
     }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -87,6 +85,4 @@ class FragmentNotes : Fragment(), ItemListener {
         val takeNote = Operation(R.string.take_note, R.drawable.edit) { goToActivity(TakeNote::class.java) }
         showMenu(takeNote)
     }
-
-
 }

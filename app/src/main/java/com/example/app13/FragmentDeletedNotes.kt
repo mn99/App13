@@ -34,6 +34,7 @@ class FragmentDeletedNotes : Fragment(), ItemListener {
         binding?.RecyclerView?.setHasFixedSize(true)
         setupRecyclerView()
         setupObserver()
+        setHasOptionsMenu(true)
     }
     private fun setupRecyclerView() {
         binding?.RecyclerView?.layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
@@ -66,12 +67,6 @@ class FragmentDeletedNotes : Fragment(), ItemListener {
     }
     override fun onLongClick(position: Int) {
         adapter?.currentList?.get(position)?.let { baseNote -> showOperations(baseNote) }
-    }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.DeleteAll) {
-            confirmDeletionOfAllNotes()
-        }
-        return super.onOptionsItemSelected(item)
     }
     private fun confirmDeletionOfAllNotes() {
         MaterialAlertDialogBuilder(requireContext())
