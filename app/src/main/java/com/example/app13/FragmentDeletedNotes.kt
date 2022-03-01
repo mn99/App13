@@ -9,12 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.app13.databinding.FragmentDeletedNotesBinding
 import com.example.app13.databinding.FragmentNotesBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class FragmentDeletedNotes : Fragment(), ItemListener {
-    private var binding: FragmentDeletedNotesBinding? = null
+    private var binding: FragmentNotesBinding? = null
     private var adapter: BaseNoteAdapter? = null
     private val model: BaseNoteModel by activityViewModels()
     override fun onDestroyView() {
@@ -27,36 +26,29 @@ class FragmentDeletedNotes : Fragment(), ItemListener {
         adapter?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                 if (itemCount > 0) {
-                    binding?.RecyclerViewDeleted?.scrollToPosition(positionStart)
+                    binding?.RecyclerView?.scrollToPosition(positionStart)
                 }
             }
         })
-        binding?.RecyclerViewDeleted?.adapter = adapter
-        binding?.RecyclerViewDeleted?.setHasFixedSize(true)
-        binding?.deletedNotesLayout?.fitsSystemWindows = true
+        binding?.RecyclerView?.adapter = adapter
+        binding?.RecyclerView?.setHasFixedSize(true)
         setupRecyclerView()
         setupObserver()
-//        setHasOptionsMenu(true)
     }
     private fun setupRecyclerView() {
-        binding?.RecyclerViewDeleted?.layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
+        binding?.RecyclerView?.layoutManager = StaggeredGridLayoutManager(1, RecyclerView.VERTICAL)
     }
     private fun getObservable() = model.deletedNotes
     private fun setupObserver() {
         getObservable().observe(viewLifecycleOwner) { list ->
             adapter?.submitList(list)
-            binding?.RecyclerViewDeleted?.isVisible = list.isNotEmpty()
+            binding?.RecyclerView?.isVisible = list.isNotEmpty()
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentDeletedNotesBinding.inflate(inflater)
+        binding = FragmentNotesBinding.inflate(inflater)
         return binding?.root
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        menu.clear()
-//        inflater.inflate(R.menu.archived, menu)
-//    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == Constants.RequestCodeExportFile && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->
