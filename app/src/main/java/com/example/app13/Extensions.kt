@@ -89,13 +89,13 @@ fun Fragment.showMenu(vararg operations: Operation) {
     )
 
     linearLayout.setBackgroundColor(Color.parseColor("#b6d7a8"))
-    linearLayout.setPaddingRelative(0,0,0,200)
+    linearLayout.setPaddingRelative(0,0,0,250)
 
     val dialog = BottomSheetDialog(context)
     dialog.setContentView(linearLayout)
 
     val modalBottomSheetDialog = dialog.behavior
-    modalBottomSheetDialog.peekHeight = 325
+    modalBottomSheetDialog.peekHeight = 275
     modalBottomSheetDialog.isDraggable = false
 
     for (operation in operations) {
