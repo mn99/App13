@@ -160,13 +160,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun confirmDeletionOfAllNotes(item: MenuItem) {
-        MaterialAlertDialogBuilder(this)
+        MaterialAlertDialogBuilder(this, R.style.AlertDialogTheme)
             .setMessage(R.string.delete_all_notes)
             .setPositiveButton(R.string.delete) { dialog, which ->
                 model.deleteAllBaseNotes()
             }
             .setNegativeButton(R.string.cancel, null)
             .show()
+
     }
 }
 
