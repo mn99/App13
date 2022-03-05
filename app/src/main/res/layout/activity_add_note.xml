@@ -13,68 +13,10 @@
             android:layout_height="wrap_content"
             />
     </com.google.android.material.appbar.AppBarLayout>
-    <androidx.core.widget.NestedScrollView
+    <include
+        android:id="@+id/fragment_add_note"
+        layout="@layout/fragment_add_note"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:focusableInTouchMode="true"
-            android:orientation="vertical"
-            android:paddingTop="8dp"
-            android:paddingBottom="16dp">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/EditTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:hint="Title"
-                android:imeOptions="actionNext"
-                android:paddingStart="15dp"
-                android:paddingTop="15dp"
-                android:paddingEnd="15dp"
-                android:paddingBottom="15dp"
-                android:textSize="20dp"
-                android:inputType="textMultiLine|textCapSentences"
-                />
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/EditBody"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Note"
-                android:background="@null"
-                android:imeOptions="actionNext"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:textSize="15dp"
-                android:inputType="textMultiLine|textCapSentences"
-                />
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-    <RelativeLayout
-        android:id="@+id/AddNoteBottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom"
-        >
-
-        <ImageView
-            android:id="@+id/AddNoteMoreOptions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:clickable="true"
-            android:padding="10dp"
-            android:src="@drawable/vertical_dots" />
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/TimeCreated"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
-    </RelativeLayout>
+        />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
