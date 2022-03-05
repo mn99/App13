@@ -37,6 +37,13 @@ class TakeNote : AppCompatActivity() {
         binding.EditTitle.setOnNextAction {
             binding.EditBody.requestFocus()
         }
+
+
+        binding.AddNoteMoreOptions.setOnClickListener {
+
+        }
+
+
         setupEditor()
         setupListeners()
         setupToolbar(binding.AddNoteToolbar)

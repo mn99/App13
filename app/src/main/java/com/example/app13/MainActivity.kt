@@ -28,7 +28,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.NavDestination
 import com.example.app13.databinding.ActivityMainBinding
-import com.example.app13.databinding.ContentMainBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -79,12 +78,10 @@ class MainActivity : AppCompatActivity() {
         }
         setupSearch()
     }
-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
     override fun onBackPressed() {
         if (binding.drawerLayout.isOpen) {
             binding.drawerLayout.closeDrawers()
@@ -92,7 +89,6 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
         }
     }
-
     private fun handleDestinationChange(destination: NavDestination) {
         when (destination.id) {
             R.id.nav_notes -> {
@@ -106,8 +102,6 @@ class MainActivity : AppCompatActivity() {
                 binding.appBarMain.cosmeticView.setBackgroundColor(Color.TRANSPARENT)
                 showSoftKeyboard(binding.appBarMain.EnterSearchKeyword)
             }
-
-
             R.id.nav_deleted -> {
                 binding.appBarMain.fab.hide()
                 binding.appBarMain.bottomAppBar.performHide()
@@ -118,12 +112,9 @@ class MainActivity : AppCompatActivity() {
                 binding.appBarMain.bottomAppBar.performHide()
                 binding.appBarMain.cosmeticView.setBackgroundColor(Color.TRANSPARENT)
             }
-
             else -> {
                 binding.appBarMain.fab.hide()
-//                binding.appBarMain.cosmeticView.setBackgroundColor(Color.TRANSPARENT)
                 binding.appBarMain.cosmeticView.setBackgroundColor(Color.WHITE)
-
             }
         }
         binding.appBarMain.toolbar.isVisible = (destination.id == R.id.nav_notes)
@@ -131,34 +122,29 @@ class MainActivity : AppCompatActivity() {
         binding.appBarMain.toolbarDeleted.isVisible = (destination.id == R.id.nav_deleted)
         binding.appBarMain.toolbarArchived.isVisible = (destination.id == R.id.nav_archived)
     }
-
     private fun goToActivity(activity: Class<*>, baseNote: BaseNote? = null) {
         val intent = Intent(this, activity)
         intent.putExtra(Constants.SelectedBaseNote, baseNote)
         startActivity(intent)
     }
-
     private fun setupSearch() {
         binding.appBarMain.EnterSearchKeyword.setText(model.keyword)
         binding.appBarMain.EnterSearchKeyword.addTextChangedListener(onTextChanged = { text, start, count, after ->
             model.keyword = text?.trim()?.toString() ?: String()
         })
     }
-
     private fun showSoftKeyboard(view: View) {
         if (view.requestFocus()) {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
         }
     }
-
     private fun hideSoftKeyboard(view: View) {
         if (view.requestFocus()) {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
-
     fun confirmDeletionOfAllNotes(item: MenuItem) {
         MaterialAlertDialogBuilder(this, R.style.AlertDialogTheme)
             .setMessage(R.string.delete_all_notes)
@@ -167,7 +153,6 @@ class MainActivity : AppCompatActivity() {
             }
             .setNegativeButton(R.string.cancel, null)
             .show()
-
     }
 }
 

@@ -18,6 +18,7 @@
             android:background="@android:color/transparent"
             android:paddingTop="175dp"
             android:paddingBottom="110dp"
+            android:overScrollMode="never"
             />
     </androidx.core.widget.NestedScrollView>
 </FrameLayout>

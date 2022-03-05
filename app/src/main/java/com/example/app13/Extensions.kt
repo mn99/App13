@@ -1,5 +1,6 @@
 package com.example.app13
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
@@ -15,6 +16,7 @@ import android.text.style.URLSpan
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import com.example.app13.databinding.MenuItemBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
