@@ -34,13 +34,13 @@ class TakeNote : AppCompatActivity() {
         }
         binding = ActivityAddNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.fragmentAddNote.EditTitle.setOnNextAction {
-            binding.fragmentAddNote.EditBody.requestFocus()
+        binding.EditTitle.setOnNextAction {
+            binding.EditBody.requestFocus()
         }
 
 
-        binding.fragmentAddNote.AddNoteMoreOptions.setOnClickListener {
-
+        binding.AddNoteMoreOptions.setOnClickListener {
+            Toast.makeText(applicationContext, "Neither ImageView nor ImageButton", Toast.LENGTH_LONG).show()
         }
 
 
@@ -48,13 +48,13 @@ class TakeNote : AppCompatActivity() {
         setupListeners()
         setupToolbar(binding.AddNoteToolbar)
         if (model.isNewNote) {
-            binding.fragmentAddNote.EditBody.requestFocus()
+            binding.EditBody.requestFocus()
         }
         setStateFromModel()
     }
     private fun setupEditor() {
         setupMovementMethod()
-        binding.fragmentAddNote.EditBody.customSelectionActionModeCallback = object : ActionMode.Callback {
+        binding.EditBody.customSelectionActionModeCallback = object : ActionMode.Callback {
             override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
                 when (item?.itemId) {
                     R.id.Bold -> {
@@ -96,30 +96,30 @@ class TakeNote : AppCompatActivity() {
         }
     }
     private fun setupListeners() {
-        binding.fragmentAddNote.EditTitle.addTextChangedListener(onTextChanged = { text, start, count, after ->
+        binding.EditTitle.addTextChangedListener(onTextChanged = { text, start, count, after ->
             model.title = text.toString().trim()
         })
 
-        binding.fragmentAddNote.EditBody.addTextChangedListener(afterTextChanged = { editable ->
+        binding.EditBody.addTextChangedListener(afterTextChanged = { editable ->
             model.body = editable
         })
     }
     private fun setStateFromModel() {
         val formatter = BaseNoteModel.getDateFormatter(getLocale())
-        binding.fragmentAddNote.EditTitle.setText(model.title)
-        binding.fragmentAddNote.EditBody.text = model.body
-        binding.fragmentAddNote.TimeCreated.text = formatter.format(model.timestamp)
+        binding.EditTitle.setText(model.title)
+        binding.EditBody.text = model.body
+        binding.TimeCreated.text = formatter.format(model.timestamp)
     }
     private fun setupMovementMethod() {
         val movementMethod = LinkMovementMethod { span ->
             MaterialAlertDialogBuilder(this)
                 .setItems(R.array.linkOptions) { dialog, which ->
                     if (which == 1) {
-                        val spanStart = binding.fragmentAddNote.EditBody.text?.getSpanStart(span)
-                        val spanEnd = binding.fragmentAddNote.EditBody.text?.getSpanEnd(span)
+                        val spanStart = binding.EditBody.text?.getSpanStart(span)
+                        val spanEnd = binding.EditBody.text?.getSpanEnd(span)
 
                         ifBothNotNullAndInvalid(spanStart, spanEnd) { start, end ->
-                            val text = binding.fragmentAddNote.EditBody.text?.substring(start, end)
+                            val text = binding.EditBody.text?.substring(start, end)
                             if (text != null) {
                                 val link = getURLFrom(text)
                                 val uri = Uri.parse(link)
@@ -135,24 +135,24 @@ class TakeNote : AppCompatActivity() {
                     }
                 }.show()
         }
-        binding.fragmentAddNote.EditBody.movementMethod = movementMethod
+        binding.EditBody.movementMethod = movementMethod
     }
     private fun removeSpans() {
-        val selectionEnd = binding.fragmentAddNote.EditBody.selectionEnd
-        val selectionStart = binding.fragmentAddNote.EditBody.selectionStart
+        val selectionEnd = binding.EditBody.selectionEnd
+        val selectionStart = binding.EditBody.selectionStart
 
         ifBothNotNullAndInvalid(selectionStart, selectionEnd) { start, end ->
-            binding.fragmentAddNote.EditBody.text?.getSpans(start, end, CharacterStyle::class.java)?.forEach { span ->
-                binding.fragmentAddNote.EditBody.text?.removeSpan(span)
+            binding.EditBody.text?.getSpans(start, end, CharacterStyle::class.java)?.forEach { span ->
+                binding.EditBody.text?.removeSpan(span)
             }
         }
     }
     private fun applySpan(spanToApply: Any) {
-        val selectionEnd = binding.fragmentAddNote.EditBody.selectionEnd
-        val selectionStart = binding.fragmentAddNote.EditBody.selectionStart
+        val selectionEnd = binding.EditBody.selectionEnd
+        val selectionStart = binding.EditBody.selectionStart
 
         ifBothNotNullAndInvalid(selectionStart, selectionEnd) { start, end ->
-            binding.fragmentAddNote.EditBody.text?.setSpan(spanToApply, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            binding.EditBody.text?.setSpan(spanToApply, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
     }
     private fun ifBothNotNullAndInvalid(start: Int?, end: Int?, function: (start: Int, end: Int) -> Unit) {
