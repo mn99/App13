@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/nav_deleted"
         android:name="com.example.app13.FragmentDeletedNotes"
-        tools:layout="@layout/fragment_deleted_notes" />
+        />
 
     <fragment
         android:id="@+id/nav_archived"
