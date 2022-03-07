@@ -40,7 +40,8 @@ class TakeNote : AppCompatActivity() {
 
 
         binding.AddNoteMoreOptions.setOnClickListener {
-            Toast.makeText(applicationContext, "Neither ImageView nor ImageButton", Toast.LENGTH_LONG).show()
+            val modalBottomSheetFragment = FragmentBottomSheet()
+            modalBottomSheetFragment.show(supportFragmentManager, modalBottomSheetFragment.tag)
         }
 
 
