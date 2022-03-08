@@ -43,7 +43,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/EditBody"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:hint="Note"
                 android:background="@null"
                 android:imeOptions="actionNext"
@@ -51,7 +51,37 @@
                 android:paddingEnd="15dp"
                 android:textSize="15dp"
                 android:inputType="textMultiLine|textCapSentences"
+                android:layout_marginBottom="35dp"
+                android:gravity="top"
+                android:visibility="gone"
                 />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecyclerViewCheckboxes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:paddingTop="4dp"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/AddItemCheckboxes"
+                style="@style/TextView.Clickable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="12dp"
+                android:gravity="center_vertical"
+                android:paddingStart="20dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="12dp"
+                android:text="@string/add_item"
+                android:textAppearance="?textAppearanceSubtitle2"
+                android:textColor="?android:textColorHint"
+                app:drawableStartCompat="@drawable/add"
+                app:drawableTint="?android:textColorHint"
+                android:visibility="gone"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
     <RelativeLayout
@@ -60,7 +90,6 @@
         android:layout_height="50dp"
         android:layout_gravity="bottom"
         >
-
         <ImageView
             android:id="@+id/AddNoteMoreOptions"
             android:layout_width="wrap_content"
@@ -74,8 +103,8 @@
             android:id="@+id/TimeCreated"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:gravity="center"/>
     </RelativeLayout>
     <androidx.fragment.app.FragmentContainerView
         android:layout_height="wrap_content"

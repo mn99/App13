@@ -34,4 +34,8 @@
     <string name="delete_all_notes">Delete all notes?</string>
     <string name="delete_note_forever">Delete note forever?</string>
     <string name="cancel">Cancel</string>
+    <string name="checkboxes">Checkboxes</string>
+    <string name="add_item">Add Item</string>
+    <string name="item">Item</string>
+    <string name="drag_handle">Drag Handle</string>
 </resources>

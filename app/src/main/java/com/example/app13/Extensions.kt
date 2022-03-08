@@ -15,7 +15,9 @@ import android.text.style.TypefaceSpan
 import android.text.style.URLSpan
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import com.example.app13.databinding.MenuItemBinding
@@ -65,6 +67,21 @@ fun TextInputEditText.setOnNextAction(onNext: () -> Unit) {
         } else return@setOnEditorActionListener false
     }
 }
+fun EditText.setOnNextAction(onNext: () -> Unit) {
+    setRawInputType(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
+    setOnKeyListener { v, keyCode, event ->
+        if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+            onNext()
+            return@setOnKeyListener true
+        } else return@setOnKeyListener false
+    }
+    setOnEditorActionListener { v, actionId, event ->
+        if (actionId == EditorInfo.IME_ACTION_NEXT) {
+            onNext()
+            return@setOnEditorActionListener true
+        } else return@setOnEditorActionListener false
+    }
+}
 fun Spannable.setSpan(span: Any, start: Int, end: Int) {
     try {
         if (end <= length) {
@@ -83,23 +100,45 @@ class Operation(val textId: Int, val drawableId: Int, val operation: () -> Unit)
 fun Fragment.showMenu(vararg operations: Operation) {
     val context = requireContext()
     val linearLayout = LinearLayout(context)
-
     linearLayout.orientation = LinearLayout.VERTICAL
     linearLayout.layoutParams = LinearLayout.LayoutParams(
         LinearLayout.LayoutParams.MATCH_PARENT,
         LinearLayout.LayoutParams.WRAP_CONTENT
     )
-
     linearLayout.setBackgroundColor(Color.parseColor("#b6d7a8"))
     linearLayout.setPaddingRelative(0,0,0,250)
-
     val dialog = BottomSheetDialog(context)
     dialog.setContentView(linearLayout)
-
     val modalBottomSheetDialog = dialog.behavior
     modalBottomSheetDialog.peekHeight = 275
     modalBottomSheetDialog.isDraggable = false
+    for (operation in operations) {
+        val item = MenuItemBinding.inflate(layoutInflater).root
+        item.setText(operation.textId)
+        item.setOnClickListener {
+            dialog.dismiss()
+            operation.operation.invoke()
+        }
+        item.setCompoundDrawablesRelativeWithIntrinsicBounds(operation.drawableId, 0, 0, 0)
+        linearLayout.addView(item)
+    }
+    dialog.show()
+}
 
+fun AppCompatActivity.showMenuActivity(vararg operations: Operation) {
+    val linearLayout = LinearLayout(this)
+    linearLayout.orientation = LinearLayout.VERTICAL
+    linearLayout.layoutParams = LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams.MATCH_PARENT,
+        LinearLayout.LayoutParams.WRAP_CONTENT
+    )
+    linearLayout.setBackgroundColor(Color.parseColor("#b6d7a8"))
+    linearLayout.setPaddingRelative(0,0,0,250)
+    val dialog = BottomSheetDialog(this)
+    dialog.setContentView(linearLayout)
+    val dialogBehavior = dialog.behavior
+    dialogBehavior.peekHeight = 250
+    dialogBehavior.isDraggable = false
     for (operation in operations) {
         val item = MenuItemBinding.inflate(layoutInflater).root
         item.setText(operation.textId)

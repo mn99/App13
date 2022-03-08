@@ -26,6 +26,7 @@ class TakeNoteModel(app: Application) : AndroidViewModel(app) {
     var title = String()
     var timestamp = Date().time
     var body = Editable.Factory.getInstance().newEditable(String())
+    val items = java.util.ArrayList<ListItem>()
     private fun getBaseNote(): BaseNote {
         return BaseNote.createNote(id, folder, title, timestamp, body.toString().trimEnd(), body.getFilteredSpans())
     }

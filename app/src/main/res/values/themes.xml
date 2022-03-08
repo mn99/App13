@@ -36,4 +36,10 @@
         <item name="rippleColor">#8BC34A</item>
     </style>
 
+    <style name="TextView.Clickable" parent="Widget.AppCompat.TextView">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
 </resources>

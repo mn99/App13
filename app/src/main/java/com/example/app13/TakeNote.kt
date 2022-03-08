@@ -1,5 +1,6 @@
 package com.example.app13
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
@@ -11,9 +12,11 @@ import android.util.Patterns
 import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.example.app13.databinding.ActivityAddNoteBinding
 import com.google.android.material.appbar.MaterialToolbar
@@ -22,6 +25,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class TakeNote : AppCompatActivity() {
     private lateinit var binding: ActivityAddNoteBinding
     private val model: TakeNoteModel by viewModels()
+    private lateinit var adapter: TakeListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val selectedBaseNote = intent.getParcelableExtra<BaseNote>(Constants.SelectedBaseNote)
@@ -39,10 +43,17 @@ class TakeNote : AppCompatActivity() {
         }
 
 
+
+
         binding.AddNoteMoreOptions.setOnClickListener {
-            val modalBottomSheetFragment = FragmentBottomSheet()
-            modalBottomSheetFragment.show(supportFragmentManager, modalBottomSheetFragment.tag)
+            val checkboxes = Operation(R.string.checkboxes, R.drawable.checkbox_16) {
+                binding.RecyclerViewCheckboxes.visibility = View.VISIBLE
+                binding.AddItemCheckboxes.visibility = View.VISIBLE
+            }
+            showMenuActivity(checkboxes)
         }
+
+
 
 
         setupEditor()
@@ -209,5 +220,15 @@ class TakeNote : AppCompatActivity() {
     private fun archiveNote() {
         model.moveBaseNoteToArchive()
         onBackPressed()
+    }
+    private fun addListItem() {
+        val position = model.items.size
+        val listItem = ListItem(String(), false)
+        model.items.add(listItem)
+        adapter.notifyItemInserted(position)
+        binding.RecyclerViewCheckboxes.post {
+            val viewHolder = binding.RecyclerViewCheckboxes.findViewHolderForAdapterPosition(position) as TakeListViewHolder?
+            viewHolder?.binding?.ListItem?.requestFocus()
+        }
     }
 }
