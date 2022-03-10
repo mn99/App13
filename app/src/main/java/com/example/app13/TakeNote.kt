@@ -1,7 +1,5 @@
 package com.example.app13
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
@@ -38,6 +36,7 @@ class TakeNote : AppCompatActivity() {
         }
         binding = ActivityAddNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        defaultVisiblities()
         binding.EditTitle.setOnNextAction {
             binding.EditBody.requestFocus()
         }
@@ -47,10 +46,22 @@ class TakeNote : AppCompatActivity() {
 
         binding.AddNoteMoreOptions.setOnClickListener {
             val checkboxes = Operation(R.string.checkboxes, R.drawable.checkbox_16) {
+                binding.EditBody.text?.clear()
                 binding.RecyclerViewCheckboxes.visibility = View.VISIBLE
                 binding.AddItemCheckboxes.visibility = View.VISIBLE
+                binding.EditBody.visibility = View.GONE
             }
-            showMenuActivity(checkboxes)
+            val note = Operation(R.string.take_note, R.drawable.edit) {
+                defaultVisiblities()
+            }
+            if (binding.EditBody.isVisible) {
+                showMenuActivity(checkboxes)
+            } else {
+                showMenuActivity(note)
+            }
+        }
+        binding.AddItemCheckboxes.setOnClickListener {
+            addListItem()
         }
 
 
@@ -111,7 +122,6 @@ class TakeNote : AppCompatActivity() {
         binding.EditTitle.addTextChangedListener(onTextChanged = { text, start, count, after ->
             model.title = text.toString().trim()
         })
-
         binding.EditBody.addTextChangedListener(afterTextChanged = { editable ->
             model.body = editable
         })
@@ -231,4 +241,20 @@ class TakeNote : AppCompatActivity() {
             viewHolder?.binding?.ListItem?.requestFocus()
         }
     }
+    private fun moveToNext(currentPosition: Int) {
+        val viewHolder = binding.RecyclerViewCheckboxes.findViewHolderForAdapterPosition(currentPosition + 1) as TakeListViewHolder?
+        if (viewHolder != null) {
+            if (viewHolder.binding.CheckBox.isChecked) {
+                moveToNext(currentPosition + 1)
+            } else viewHolder.binding.ListItem.requestFocus()
+        } else addListItem()
+    }
+
+    private fun defaultVisiblities() {
+        binding.AddItemCheckboxes.visibility = View.GONE
+        binding.RecyclerViewCheckboxes.visibility = View.GONE
+        binding.EditBody.visibility = View.VISIBLE
+    }
+
+
 }
