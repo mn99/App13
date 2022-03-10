@@ -16,14 +16,19 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.app13.databinding.ActivityAddNoteBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.util.*
 
 class TakeNote : AppCompatActivity() {
     private lateinit var binding: ActivityAddNoteBinding
     private val model: TakeNoteModel by viewModels()
     private lateinit var adapter: TakeListAdapter
+    private lateinit var type: Type
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val selectedBaseNote = intent.getParcelableExtra<BaseNote>(Constants.SelectedBaseNote)
@@ -36,27 +41,32 @@ class TakeNote : AppCompatActivity() {
         }
         binding = ActivityAddNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        defaultVisiblities()
+        if (!model.isNewNote) {
+            binding.AddNoteMoreOptions.visibility = View.GONE
+        } else {
+            noteVisible()
+        }
+        if (selectedBaseNote?.type == Type.LIST) {
+            listVisible()
+        } else {
+            noteVisible()
+        }
         binding.EditTitle.setOnNextAction {
             binding.EditBody.requestFocus()
         }
-
-
-
-
         binding.AddNoteMoreOptions.setOnClickListener {
             val checkboxes = Operation(R.string.checkboxes, R.drawable.checkbox_16) {
                 binding.EditBody.text?.clear()
-                binding.RecyclerViewCheckboxes.visibility = View.VISIBLE
-                binding.AddItemCheckboxes.visibility = View.VISIBLE
-                binding.EditBody.visibility = View.GONE
+                listVisible()
+                addListItem()
             }
             val note = Operation(R.string.take_note, R.drawable.edit) {
-                defaultVisiblities()
+                noteVisible()
             }
-            if (binding.EditBody.isVisible) {
+            if (binding.EditBody.isVisible && model.isNewNote) {
                 showMenuActivity(checkboxes)
-            } else {
+            }
+            if (!binding.EditBody.isVisible && model.isNewNote) {
                 showMenuActivity(note)
             }
         }
@@ -74,6 +84,7 @@ class TakeNote : AppCompatActivity() {
             binding.EditBody.requestFocus()
         }
         setStateFromModel()
+        setupRecyclerView()
     }
     private fun setupEditor() {
         setupMovementMethod()
@@ -194,6 +205,11 @@ class TakeNote : AppCompatActivity() {
     }
     override fun onBackPressed() {
         model.saveNote {
+            type = if (binding.EditBody.isVisible) {
+                Type.NOTE
+            } else {
+                Type.LIST
+            }
             super.onBackPressed()
         }
     }
@@ -231,6 +247,41 @@ class TakeNote : AppCompatActivity() {
         model.moveBaseNoteToArchive()
         onBackPressed()
     }
+    private fun setupRecyclerView() {
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
+            override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
+                val drag = ItemTouchHelper.UP or ItemTouchHelper.DOWN
+                val swipe = ItemTouchHelper.START or ItemTouchHelper.END
+                return makeMovementFlags(drag, swipe)
+            }
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                model.items.removeAt(viewHolder.adapterPosition)
+                adapter.notifyItemRemoved(viewHolder.adapterPosition)
+            }
+            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+                Collections.swap(model.items, viewHolder.adapterPosition, target.adapterPosition)
+                adapter.notifyItemMoved(viewHolder.adapterPosition, target.adapterPosition)
+                return true
+            }
+        })
+        adapter = TakeListAdapter(model.items, object : ListItemListener {
+            override fun onMoveToNext(position: Int) {
+                moveToNext(position)
+            }
+            override fun onStartDrag(viewHolder: RecyclerView.ViewHolder) {
+                itemTouchHelper.startDrag(viewHolder)
+            }
+            override fun afterTextChange(position: Int, text: String) {
+                model.items[position].body = text
+            }
+            override fun onCheckedChange(position: Int, checked: Boolean) {
+                model.items[position].checked = checked
+            }
+        })
+        itemTouchHelper.attachToRecyclerView(binding.RecyclerViewCheckboxes)
+        binding.RecyclerViewCheckboxes.adapter = adapter
+        binding.RecyclerViewCheckboxes.layoutManager = LinearLayoutManager(this)
+    }
     private fun addListItem() {
         val position = model.items.size
         val listItem = ListItem(String(), false)
@@ -250,10 +301,15 @@ class TakeNote : AppCompatActivity() {
         } else addListItem()
     }
 
-    private fun defaultVisiblities() {
+    private fun noteVisible() {
         binding.AddItemCheckboxes.visibility = View.GONE
         binding.RecyclerViewCheckboxes.visibility = View.GONE
         binding.EditBody.visibility = View.VISIBLE
+    }
+    private fun listVisible() {
+        binding.AddItemCheckboxes.visibility = View.VISIBLE
+        binding.RecyclerViewCheckboxes.visibility = View.VISIBLE
+        binding.EditBody.visibility = View.GONE
     }
 
 
