@@ -28,7 +28,6 @@ class TakeNote : AppCompatActivity() {
     private lateinit var binding: ActivityAddNoteBinding
     private val model: TakeNoteModel by viewModels()
     private lateinit var adapter: TakeListAdapter
-    private lateinit var type: Type
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val selectedBaseNote = intent.getParcelableExtra<BaseNote>(Constants.SelectedBaseNote)
@@ -41,50 +40,50 @@ class TakeNote : AppCompatActivity() {
         }
         binding = ActivityAddNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if (!model.isNewNote) {
-            binding.AddNoteMoreOptions.visibility = View.GONE
-        } else {
-            noteVisible()
-        }
-        if (selectedBaseNote?.type == Type.LIST) {
-            listVisible()
-        } else {
-            noteVisible()
-        }
+//        if (!model.isNewNote) {
+//            binding.AddNoteMoreOptions.visibility = View.GONE
+//        } else {
+//            noteVisible()
+//        }
+//        if (selectedBaseNote?.type == Type.LIST) {
+//            listVisible()
+//        } else {
+//            noteVisible()
+//        }
         binding.EditTitle.setOnNextAction {
             binding.EditBody.requestFocus()
         }
-        binding.AddNoteMoreOptions.setOnClickListener {
-            val checkboxes = Operation(R.string.checkboxes, R.drawable.checkbox_16) {
-                binding.EditBody.text?.clear()
-                listVisible()
-                addListItem()
-            }
-            val note = Operation(R.string.take_note, R.drawable.edit) {
-                noteVisible()
-            }
-            if (binding.EditBody.isVisible && model.isNewNote) {
-                showMenuActivity(checkboxes)
-            }
-            if (!binding.EditBody.isVisible && model.isNewNote) {
-                showMenuActivity(note)
-            }
-        }
-        binding.AddItemCheckboxes.setOnClickListener {
-            addListItem()
-        }
+//        binding.AddNoteMoreOptions.setOnClickListener {
+//            val checkboxes = Operation(R.string.checkboxes, R.drawable.checkbox_16) {
+//                binding.EditBody.text?.clear()
+//                listVisible()
+//                addListItem()
+//            }
+//            val note = Operation(R.string.take_note, R.drawable.edit) {
+//                noteVisible()
+//            }
+//            if (binding.EditBody.isVisible && model.isNewNote) {
+//                showMenuActivity(checkboxes)
+//            }
+//            if (!binding.EditBody.isVisible && model.isNewNote) {
+//                showMenuActivity(note)
+//            }
+//        }
+//        binding.AddItemCheckboxes.setOnClickListener {
+//            addListItem()
+//        }
 
 
 
 
-        setupEditor()
+//        setupEditor()
         setupListeners()
         setupToolbar(binding.AddNoteToolbar)
         if (model.isNewNote) {
             binding.EditBody.requestFocus()
         }
         setStateFromModel()
-        setupRecyclerView()
+//        setupRecyclerView()
     }
     private fun setupEditor() {
         setupMovementMethod()
@@ -205,11 +204,6 @@ class TakeNote : AppCompatActivity() {
     }
     override fun onBackPressed() {
         model.saveNote {
-            type = if (binding.EditBody.isVisible) {
-                Type.NOTE
-            } else {
-                Type.LIST
-            }
             super.onBackPressed()
         }
     }
@@ -247,70 +241,70 @@ class TakeNote : AppCompatActivity() {
         model.moveBaseNoteToArchive()
         onBackPressed()
     }
-    private fun setupRecyclerView() {
-        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
-            override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
-                val drag = ItemTouchHelper.UP or ItemTouchHelper.DOWN
-                val swipe = ItemTouchHelper.START or ItemTouchHelper.END
-                return makeMovementFlags(drag, swipe)
-            }
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                model.items.removeAt(viewHolder.adapterPosition)
-                adapter.notifyItemRemoved(viewHolder.adapterPosition)
-            }
-            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-                Collections.swap(model.items, viewHolder.adapterPosition, target.adapterPosition)
-                adapter.notifyItemMoved(viewHolder.adapterPosition, target.adapterPosition)
-                return true
-            }
-        })
-        adapter = TakeListAdapter(model.items, object : ListItemListener {
-            override fun onMoveToNext(position: Int) {
-                moveToNext(position)
-            }
-            override fun onStartDrag(viewHolder: RecyclerView.ViewHolder) {
-                itemTouchHelper.startDrag(viewHolder)
-            }
-            override fun afterTextChange(position: Int, text: String) {
-                model.items[position].body = text
-            }
-            override fun onCheckedChange(position: Int, checked: Boolean) {
-                model.items[position].checked = checked
-            }
-        })
-        itemTouchHelper.attachToRecyclerView(binding.RecyclerViewCheckboxes)
-        binding.RecyclerViewCheckboxes.adapter = adapter
-        binding.RecyclerViewCheckboxes.layoutManager = LinearLayoutManager(this)
-    }
-    private fun addListItem() {
-        val position = model.items.size
-        val listItem = ListItem(String(), false)
-        model.items.add(listItem)
-        adapter.notifyItemInserted(position)
-        binding.RecyclerViewCheckboxes.post {
-            val viewHolder = binding.RecyclerViewCheckboxes.findViewHolderForAdapterPosition(position) as TakeListViewHolder?
-            viewHolder?.binding?.ListItem?.requestFocus()
-        }
-    }
-    private fun moveToNext(currentPosition: Int) {
-        val viewHolder = binding.RecyclerViewCheckboxes.findViewHolderForAdapterPosition(currentPosition + 1) as TakeListViewHolder?
-        if (viewHolder != null) {
-            if (viewHolder.binding.CheckBox.isChecked) {
-                moveToNext(currentPosition + 1)
-            } else viewHolder.binding.ListItem.requestFocus()
-        } else addListItem()
-    }
-
-    private fun noteVisible() {
-        binding.AddItemCheckboxes.visibility = View.GONE
-        binding.RecyclerViewCheckboxes.visibility = View.GONE
-        binding.EditBody.visibility = View.VISIBLE
-    }
-    private fun listVisible() {
-        binding.AddItemCheckboxes.visibility = View.VISIBLE
-        binding.RecyclerViewCheckboxes.visibility = View.VISIBLE
-        binding.EditBody.visibility = View.GONE
-    }
+//    private fun setupRecyclerView() {
+//        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
+//            override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
+//                val drag = ItemTouchHelper.UP or ItemTouchHelper.DOWN
+//                val swipe = ItemTouchHelper.START or ItemTouchHelper.END
+//                return makeMovementFlags(drag, swipe)
+//            }
+//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//                model.items.removeAt(viewHolder.adapterPosition)
+//                adapter.notifyItemRemoved(viewHolder.adapterPosition)
+//            }
+//            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+//                Collections.swap(model.items, viewHolder.adapterPosition, target.adapterPosition)
+//                adapter.notifyItemMoved(viewHolder.adapterPosition, target.adapterPosition)
+//                return true
+//            }
+//        })
+//        adapter = TakeListAdapter(model.items, object : ListItemListener {
+//            override fun onMoveToNext(position: Int) {
+//                moveToNext(position)
+//            }
+//            override fun onStartDrag(viewHolder: RecyclerView.ViewHolder) {
+//                itemTouchHelper.startDrag(viewHolder)
+//            }
+//            override fun afterTextChange(position: Int, text: String) {
+//                model.items[position].body = text
+//            }
+//            override fun onCheckedChange(position: Int, checked: Boolean) {
+//                model.items[position].checked = checked
+//            }
+//        })
+//        itemTouchHelper.attachToRecyclerView(binding.RecyclerViewCheckboxes)
+//        binding.RecyclerViewCheckboxes.adapter = adapter
+//        binding.RecyclerViewCheckboxes.layoutManager = LinearLayoutManager(this)
+//    }
+//    private fun addListItem() {
+//        val position = model.items.size
+//        val listItem = ListItem(String(), false)
+//        model.items.add(listItem)
+//        adapter.notifyItemInserted(position)
+//        binding.RecyclerViewCheckboxes.post {
+//            val viewHolder = binding.RecyclerViewCheckboxes.findViewHolderForAdapterPosition(position) as TakeListViewHolder?
+//            viewHolder?.binding?.ListItem?.requestFocus()
+//        }
+//    }
+//    private fun moveToNext(currentPosition: Int) {
+//        val viewHolder = binding.RecyclerViewCheckboxes.findViewHolderForAdapterPosition(currentPosition + 1) as TakeListViewHolder?
+//        if (viewHolder != null) {
+//            if (viewHolder.binding.CheckBox.isChecked) {
+//                moveToNext(currentPosition + 1)
+//            } else viewHolder.binding.ListItem.requestFocus()
+//        } else addListItem()
+//    }
+//
+//    private fun noteVisible() {
+//        binding.AddItemCheckboxes.visibility = View.GONE
+//        binding.RecyclerViewCheckboxes.visibility = View.GONE
+//        binding.EditBody.visibility = View.VISIBLE
+//    }
+//    private fun listVisible() {
+//        binding.AddItemCheckboxes.visibility = View.VISIBLE
+//        binding.RecyclerViewCheckboxes.visibility = View.VISIBLE
+//        binding.EditBody.visibility = View.GONE
+//    }
 
 
 }
