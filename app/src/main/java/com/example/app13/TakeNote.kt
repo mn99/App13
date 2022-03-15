@@ -76,7 +76,7 @@ class TakeNote : AppCompatActivity() {
 
 
 
-//        setupEditor()
+        setupEditor()
         setupListeners()
         setupToolbar(binding.AddNoteToolbar)
         if (model.isNewNote) {
